@@ -17,7 +17,7 @@ all:		$(NAME)
 # Linking...
 $(NAME):	libft/libft.a libmlx/libmlx.a $(OBJS)
 			@echo "\033[1;32m$(NAME)\033[1;0m\033[32m linking...\033[0m"
-			@$(CC) $(OBJS) $(LIBRARIES) -o $(NAME) 
+			@$(CC) $(OBJS) $(LIBRARIES) -o $(NAME)
 			@echo "\033[1;32m$(NAME)\033[1;0m\033[32m created.\033[0m"
 
 # Compiling...
@@ -45,3 +45,5 @@ libft/libft.a:
 
 libmlx/libmlx.a:
 			@make -C libmlx all
+
+.PHONY: all clean fclean re
