@@ -1,17 +1,18 @@
-NAME	= cub3D
-CC		= gcc
-FLAGS	= -Wall -Wextra -Werror
+NAME		=	cub3D
+CC			=	gcc
+FLAGS		=	-Wall -Wextra -Werror
 
-S		=	src/
-O		=	obj/
+S			=	src/
+O			=	obj/
 
-OBJS	= 	$(patsubst $S%.c, $O%.o, $(SRCS))
-SRCS	=	$Scub3D.c
+OBJS		=	$(patsubst $S%.c, $O%.o, $(SRCS))
+SRCS		=	$Scub3D.c
 
-LIBRARIES	=-Llibft -lft -Llibmlx -lmlx -framework OpenGL -framework AppKit
-INCLUDES	=-I ./inc -Ilibft -Ilibmlx
+LIBRARIES	=	-Llibft -lft -Llibmlx -lmlx -framework OpenGL -framework AppKit
+INCLUDES	=	-I ./inc -Ilibft -Ilibmlx
 
-all: $(NAME)
+
+all:		$(NAME)
 
 # Linking...
 $(NAME):	libft/libft.a libmlx/libmlx.a $(OBJS)
@@ -37,7 +38,7 @@ fclean:		clean
 			@rm -f $(NAME_LK)
 			@echo "\033[1;31m$(NAME)\033[1;0m\033[31m Removed.\033[0m"
 
-re: fclean $(NAME)
+re: 		fclean $(NAME)
 
 libft/libft.a:
 			@make -C libft all
