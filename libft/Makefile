@@ -6,7 +6,7 @@
 #    By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/23 12:57:35 by amorcill          #+#    #+#              #
-#    Updated: 2021/10/01 15:41:54 by amorcill         ###   ########.fr        #
+#    Updated: 2022/04/21 19:00:45 by amorcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,17 +28,17 @@ BONUS = ft_lstnew.c		ft_lstadd_front.c	ft_lstsize.c ft_lstlast.c	 ft_lstadd_back
 all: $(NAME) bonus
 
 $(NAME):
-	gcc $(CFLAGS) -c $(SRCS)
-	ar -crs $(NAME) *.o
+	@gcc $(CFLAGS) -c $(SRCS)
+	@ar -crs $(NAME) *.o
 
 clean:
-	rm -f *.o
+	@rm -f *.o
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean $(NAME)
 
 bonus: 
-	gcc $(CFLAGS) -c $(BONUS) 
-	ar -crs $(NAME) *.o
+	@gcc $(CFLAGS) -c $(BONUS) 
+	@ar -crs $(NAME) *.o
