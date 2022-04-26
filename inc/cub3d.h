@@ -2,7 +2,19 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-typedef struct s_map{
+
+/***************************************************************************/
+/* LIBC INCLUDES													   */
+/***************************************************************************/
+#include <fcntl.h>
+#include <stdio.h>
+#include "libft.h"
+
+
+/* ************************************************************************** */
+/* STRUCT DEFS															  	  */
+/* ************************************************************************** */
+typedef struct s_cub3d{
 	char	*path_no;
 	char	*path_so;
 	char	*path_we;
@@ -10,11 +22,31 @@ typedef struct s_map{
 	int		floor_color;
 	int		celling_color;
 	char	**map;
-}				t_map;
+}				t_cub3d;
 
 typedef struct s_cor{
 	int		x;
 	int		y;
 }				t_cor;
 
+
+/* ************************************************************************** */
+/* FUNCTION PROTOTYPES														  */
+/* ************************************************************************** */
+
+/*
+ * CUB3D
+ */
+
+
+
+/*
+ * MAP
+ */
+int	map_open(char *path, t_cub3d *cub);
+
 #endif
+
+
+
+
