@@ -1,34 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/29 16:28:28 by amorcill          #+#    #+#             */
+/*   Updated: 2022/04/29 16:56:13 by amorcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
 int	main(int argcnt, char **args)
 {
-	t_cub3d		cub;
-	//char	**map;
-	// char		arr[9][5] = {
-	// 						{'1', '1', '1', '1', '1'} ,
-	// 						{'1', '0', '0', '0', '1'} ,
-	// 						{'1', '0', '1', '1', '1'} ,
-	// 						{'1', '0', '1', '0', '0'} ,
-	// 						{'1', '0', '1', '1', '1'} ,
-	// 						{'1', '0', '0', '0', '1'} ,
-	// 						{'1', '0', '0', '0', '1'} ,
-	// 						{'1', '0', '0', '0', '1'} ,
-	// 						{'1', '1', '1', '1', '1'}
-	// 					};
+	t_cub3d	cub;
 
 	if (argcnt != 2)
 	{
-		write(2, "Error: Incorrect arguments!", 27);
+		write(2, "Error: Incorrect arguments!\n", 28);
 		return (EXIT_FAILURE);
 	}
-	if (map_open(args[1], &cub))
+
+	if (map_init(args[1], &cub))
 		return (EXIT_FAILURE);
+
 	return (EXIT_SUCCESS);
 }
-
-// t_cor get_wall_pos(t_cor pos, t_cor dir, int** map)
-// {
-// 	// (pos.x / 1) + 1
-// 	// if ()
-// }
