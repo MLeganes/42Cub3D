@@ -1,7 +1,7 @@
-NO ./imgs/no.xmp
-SO ./imgs/so.xmp
-WE ./imgs/we.xmp
-EA ./imgs/ea.xmp
+NO ./imgs/no.xpm
+SO ./imgs/so.xpm
+WE ./imgs/we.xpm
+EA ./imgs/ea.xpm
 F 220,100,0
 C 225,30,0
 

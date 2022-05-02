@@ -74,6 +74,11 @@ typedef struct s_cub3d{
  */
 int	map_init(char *path, t_cub3d *cub);
 int	map_get_imgs_path(t_cub3d *cub, char *path);
-int	map_find_identifier(t_cub3d *cub, t_identifier ident, char *cub_map, char *line)
+int	map_find_identifier(t_cub3d *cub, t_identifier ident, char *cub_map);
+
+/*
+ * ERROR
+ */
+int error_exit_failure(char *msg);
 
 #endif

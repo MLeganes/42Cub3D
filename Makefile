@@ -6,7 +6,7 @@ S			=	src/
 O			=	obj/
 
 OBJS		=	$(patsubst $S%.c, $O%.o, $(SRCS))
-SRCS		=	$Scub3D.c $Smap.c
+SRCS		=	$Scub3D.c $Serror.c $Smap.c
 
 #LIBRARIES	=	-Llibft -lft -Llibmlx -lmlx -framework OpenGL -framework AppKit
 #INCLUDES	=	-I ./inc -Ilibft -Ilibmlx
