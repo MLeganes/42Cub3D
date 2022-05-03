@@ -22,13 +22,20 @@ static int map_get_xpm_path(t_cub3d *cub, t_identifier ident, char *line)
 	char	**split;
 	
 	split = ft_split(line, ' ');
-	if ( split[1] && (ft_strlen(split[1]) > 4) && ( ft_strncmp(&(split[1])[ft_strlen(split[1]) - 5], ".xpm", 4) == 0))
-	{
-		printf("Split[1] and extension CORRECT!!!: %s \n", split[1]);
-		cub->img[ident]->path_tex = split[1];
+	if (split[1] && (ft_strlen(split[1]) > 4) && ( ft_strncmp(&(split[1])[ft_strlen(split[1]) - 5], ".xpm", 4) == 0))
+	{		
+		cub->img[ident]->path_tex = ft_strdup(split[1]);
+		free(line);
+		free(split);
 		return (EXIT_SUCCESS);
 	}
-	return (EXIT_FAILURE);
+	else
+	{
+		free(line);
+		free(split);
+		printf("Error: wrong extension in theme %s\n", ident2str(ident));
+		return(error_exit_failure("Error: wrong extension in the theme\n"));
+	}
 }
 
 int	map_find_identifier(t_cub3d *cub, t_identifier ident, char *cub_map)
@@ -40,22 +47,17 @@ int	map_find_identifier(t_cub3d *cub, t_identifier ident, char *cub_map)
 	line = NULL;
 	fd = open(cub_map, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("map");
-		return (error_exit_failure("Error: fail to read map\n"));
-	}
+		return (error_exit_failure("Error: No such file or directory"));
 	line = get_next_line(fd);
-	if (line == NULL)
-		exit(write(2, "Error: empty map file\n", 22));
+	// if (line == NULL)
+	// 	return(error_exit_failure("Error: map is empty\n"));
 	find = 1;
 	while(line && find)
 	{
 		if (ft_strnstr(line, ident2str(ident), ft_strlen(ident2str(ident))))
 		{
-			printf("Mapa line looking for %s name: %s",ident2str(ident), line);
 			find = 0;
 			map_get_xpm_path(cub, ident, line);
-			cub->img[ident]->path_tex = ft_strdup(line);
 			close(fd);
 			return (EXIT_SUCCESS);
 		}
@@ -82,10 +84,7 @@ int map_get_imgs_path(t_cub3d *cub, char *cub_map)
 int	map_init(char *path, t_cub3d *cub)
 {
 	if (ft_strlen(path) > 4 && ft_strncmp(&path[ft_strlen(path) - 4], ".cub", 4))
-	{
-		perror("map"); //I donot understand the perror!!!!
-		return(write(2, "Error: no valid map path or wrong extension\n", 45));
-	}
+		return(error_exit_failure("Error: wrong extension in the map path\n"));
 	if (map_get_imgs_path(cub, path))
 		return (EXIT_FAILURE);
 

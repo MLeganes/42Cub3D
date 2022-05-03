@@ -12,3 +12,7 @@
 
 * [cub3D](https://harm-smits.github.io/42docs/projects/cub3d)
 * [github-ttranche](https://github.com/ttranche/cub3D)
+
+# pwd
+	Libraris
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
