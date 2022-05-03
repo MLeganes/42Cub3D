@@ -8,21 +8,24 @@ O			=	obj/
 OBJS		=	$(patsubst $S%.c, $O%.o, $(SRCS))
 SRCS		=	$Scub3D.c $Serror.c $Smap.c
 
-#LIBRARIES	=	-Llibft -lft -Llibmlx -lmlx -framework OpenGL -framework AppKit
-#INCLUDES	=	-I ./inc -Ilibft -Ilibmlx
+LIBRARIES	=	-Llibft -lft -Llibmlx -lmlx -framework OpenGL -framework AppKit
+INCLUDES	=	-I ./inc -Ilibft -Ilibmlx
 
-LIBRARIES	=	-Llibft -lft 
-INCLUDES	=	-I ./inc -Ilibft
+# To run in Linux without libmlx.
+#LIBRARIES	=	-Llibft -lft 
+#INCLUDES	=	-I ./inc -Ilibft
 
 
 all:		$(NAME)
 
 # Linking...
-#$(NAME):	libft/libft.a libmlx/libmlx.a $(OBJS)
-$(NAME):	libft/libft.a $(OBJS)
+# To run in Linux without libmlx.
+#$(NAME):	libft/libft.a $(OBJS)
+
+$(NAME):	libft/libft.a libmlx/libmlx.a $(OBJS)
 			@echo "\033[1;32m$(NAME)\033[1;0m\033[32m linking...\033[0m"
 			@$(CC) $(OBJS) $(LIBRARIES) -o $(NAME)
-			echo "\033[1;32m$(NAME)\033[1;0m\033[32m created.\033[0m"
+			@echo "\033[1;32m$(NAME)\033[1;0m\033[32m created.\033[0m"
 
 # Compiling...
 $O%.o:		$S%.c
