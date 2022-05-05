@@ -6,13 +6,13 @@
 /*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 10:13:27 by amorcill          #+#    #+#             */
-/*   Updated: 2021/10/01 15:52:00 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:00:09 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFFER_SIZE 48
+# define BUFFER_SIZE 1
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>

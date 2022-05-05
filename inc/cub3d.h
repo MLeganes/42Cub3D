@@ -29,7 +29,7 @@ typedef struct s_img
 {
 	char	*path_tex;
 	void	*ptr; //mlx pointer
-}				t_img;
+}			t_img;
 
 typedef struct s_map
 {
@@ -41,7 +41,7 @@ typedef struct s_map
 typedef struct s_cor{
 	int		x;
 	int		y;
-}				t_cor;
+}			t_cor;
 
 typedef struct s_cub3d{
 	char	*img_no;
@@ -52,11 +52,27 @@ typedef struct s_cub3d{
 	// no idea with one to use!!!
 	t_img	*img[MAX];
 	char	*img_path_tex[MAX];
-	
 	int		color_floor;
 	int		color_celling;
 	t_map	map;
-}				t_cub3d;
+
+}			t_cub3d;
+
+/********
+ * 
+ * Helper struct used in map.c
+ * due to the 25 lines 
+ * 
+ */
+typedef struct s_parser_helper
+{
+	int				fd;
+	int				status;
+	t_identifier	ident;
+	char			*line;
+	char			*start_line;
+}					t_parser;
+
 
 /* ************************************************************************** */
 /* FUNCTION PROTOTYPES														  */
@@ -70,15 +86,21 @@ typedef struct s_cub3d{
 
 
 /*
- * MAP
+ * PARSER
  */
-int	map_init(char *path, t_cub3d *cub);
-int	map_get_imgs_path(t_cub3d *cub, char *path);
-int	map_find_identifier(t_cub3d *cub, t_identifier ident, char *cub_map);
+int		parser(char *path, t_cub3d *cub);
+void	parser_init(t_parser *pars, t_identifier ident);
+int		parser_texture(t_cub3d *cub, char *path_cub);
+
+/*
+ * VALIDATION
+ */
+int		is_ext_xpm(t_parser *p);
+
 
 /*
  * ERROR
  */
-int error_exit_failure(char *msg);
+int		error_exit_failure(char *msg);
 
 #endif

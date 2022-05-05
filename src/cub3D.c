@@ -11,18 +11,16 @@ void cub3d_init(t_cub3d *cub)
 
 int	main(int argcnt, char **args)
 {
-	
 	t_cub3d	cub;
 
 	if (argcnt != 2)
-	{
-		write(2, "Error: Incorrect arguments!\n", 28);
-		return (EXIT_FAILURE);
-	}
-	cub3d_init(&cub);
+		exit (error_exit_failure("Error: Incorrect arguments!\n"));
 	
-	if (map_init(args[1], &cub))
-		return (EXIT_FAILURE);
+	cub3d_init(&cub);
 
-	return (EXIT_SUCCESS);
+	if (parser(args[1], &cub))
+		exit (EXIT_FAILURE);
+		
+	system("leaks cub3d");
+	exit (EXIT_SUCCESS);
 }
