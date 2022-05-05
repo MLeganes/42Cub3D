@@ -60,9 +60,14 @@ typedef struct s_cub3d{
 
 /********
  * 
- * Helper struct used in map.c
+ * t_parser helper struct used in parser_texture.c
  * due to the 25 lines 
  * 
+ * status:
+ * 				INIT_STATE		-1	// Starting point
+ * 				EXIT_SUCESS		0
+ * 				EXIT_FAILURE	1
+ * 				ERROR			2
  */
 typedef struct s_parser_helper
 {
@@ -82,9 +87,6 @@ typedef struct s_parser_helper
  * CUB3D
  */
 
-
-
-
 /*
  * PARSER
  */
@@ -96,7 +98,6 @@ int		parser_texture(t_cub3d *cub, char *path_cub);
  * VALIDATION
  */
 int		is_ext_xpm(t_parser *p);
-
 
 /*
  * ERROR

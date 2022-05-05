@@ -47,18 +47,6 @@ static void map_find_path_xpm(t_cub3d *cub, t_parser *p)
 	}
 }
 
-/****
- * status:
- * 
- * 				INIT_STATE		-1	// Starting point
- * 				EXIT_SUCESS		0
- * 				EXIT_FAILURE	1
- * 				ERROR			2
- * 				...
- * 				FIND_WHATEVER	50
- * 
- * 
- */
 static int	map_find_identifier(t_cub3d *cub, t_identifier ident, char *cub_map)
 {
 	t_parser pars;
