@@ -13,7 +13,11 @@
 /* STRUCT DEFS															  	  */
 /* ************************************************************************** */
 
-# define MAX	4
+# define MAX			4
+
+# define MAX_COLOR		2
+# define COLOR_NO_USED	-1
+# define COLOR_IN_USE	0
 
 typedef enum e_identifier
 {
@@ -30,6 +34,22 @@ typedef struct s_img
 	char	*path_tex;
 	void	*ptr; //mlx pointer
 }			t_img;
+
+/********
+ * t_color
+ * 
+ * used:
+ * 				NO_USED			-1
+ * 				IN_USE			0
+ */
+typedef struct s_color
+{
+	int		r;
+	int		g;
+	int		b;
+	int		rgb;
+	int		used;
+}			t_color;
 
 typedef struct s_map
 {
@@ -51,7 +71,9 @@ typedef struct s_cub3d{
 
 	// no idea with one to use!!!
 	t_img	*img[MAX];
-	char	*img_path_tex[MAX];
+	//char	*img_path_tex[MAX];
+
+	t_color color[MAX_COLOR];	//Color for floor and celling.
 	int		color_floor;
 	int		color_celling;
 	t_map	map;
@@ -64,10 +86,11 @@ typedef struct s_cub3d{
  * due to the 25 lines 
  * 
  * status:
- * 				INIT_STATE		-1	// Starting point
+ * 				INIT_STATE		-1	// Starting point. 
  * 				EXIT_SUCESS		0
  * 				EXIT_FAILURE	1
  * 				ERROR			2
+ * 				ERROR			3
  */
 typedef struct s_parser_helper
 {
@@ -76,6 +99,7 @@ typedef struct s_parser_helper
 	t_identifier	ident;
 	char			*line;
 	char			*start_line;
+	char			**split;
 }					t_parser;
 
 
@@ -93,11 +117,14 @@ typedef struct s_parser_helper
 int		parser(char *path, t_cub3d *cub);
 void	parser_init(t_parser *pars, t_identifier ident);
 int		parser_texture(t_cub3d *cub, char *path_cub);
+int		parser_color(t_cub3d *cub, char *path_cub);
+char	*ident2str(t_identifier ident);
 
 /*
  * VALIDATION
  */
 int		is_ext_xpm(t_parser *p);
+int		is_rgb_color(t_parser *p, int i);
 
 /*
  * ERROR

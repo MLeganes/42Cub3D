@@ -6,9 +6,9 @@ S			=	src/
 O			=	obj/
 
 OBJS		=	$(patsubst $S%.c, $O%.o, $(SRCS))
-SRCS		=	$Scub3D.c \
+SRCS		=	$Scub3d.c \
 				$Serror.c \
-				$Sparser.c $Sparser_init.c $Sparser_texture.c \
+				$Sparser.c $Sparser_init.c $Sparser_texture.c $Sparser_color.c \
 				$Svalidation.c \
 
 # CONFIGURATION FOR LIB AND INC

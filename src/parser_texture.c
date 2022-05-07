@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static char	*ident2str(t_identifier ident)
+char	*ident2str(t_identifier ident)
 {
 	if (ident == ID_NO)
 		return ("NO");
@@ -31,9 +31,14 @@ static void map_find_path_xpm(t_cub3d *cub, t_parser *p)
 				p->line++;
 			if(is_ext_xpm(p))
 			{
-				cub->img[p->ident]->path_tex = ft_strdup(p->line); 
-				printf("......Found path theme: %s \n", cub->img[p->ident]->path_tex);
-				p->status = 0;
+				if (cub->img[p->ident]->path_tex == NULL)
+				{
+					cub->img[p->ident]->path_tex = ft_strdup(p->line);
+					p->status = 0;
+					printf("......Found path theme: %s \n", cub->img[p->ident]->path_tex);
+				}
+				else
+					p->status = 3; //Texture repited, error!!!!!
 			}
 			else
 				p->status = 2; //Error: wrong path or wrong extension in the theme\n
@@ -67,6 +72,8 @@ static int	map_find_identifier(t_cub3d *cub, t_identifier ident, char *cub_map)
 		return(error_exit_failure("Error: missing identifier for the texture in the map\n"));
 	if(pars.status == 2)
 		return(error_exit_failure("Error: wrong extension in the texture\n"));
+	if(pars.status == 3)
+		return(error_exit_failure("Error: texture repited in the map\n"));
 	return (EXIT_SUCCESS);
 }
 

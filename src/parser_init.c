@@ -7,4 +7,6 @@ void	parser_init(t_parser *pars, t_identifier ident)
 	pars->status = -1; // INIT_POINT
 	pars->line = NULL;
 	pars->start_line = NULL;
+	pars->split = NULL;
+	
 }
