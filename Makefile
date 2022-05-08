@@ -10,6 +10,7 @@ SRCS		=	$Scub3d.c \
 				$Serror.c \
 				$Sparser.c $Sparser_init.c $Sparser_texture.c $Sparser_color.c \
 				$Svalidation.c \
+				$Sutils1.c \
 
 # CONFIGURATION FOR LIB AND INC
 

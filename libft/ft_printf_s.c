@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_printf_s.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arohmann <arohmann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 14:12:32 by amorcill          #+#    #+#             */
-/*   Updated: 2022/02/07 16:55:25 by arohmann         ###   ########.fr       */
+/*   Created: 2021/07/23 10:09:25 by amorcill          #+#    #+#             */
+/*   Updated: 2021/11/25 14:08:39 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *ch)
+int	ft_printf_s(char *str)
 {
-	int	count;
+	int	ret;
 
-	count = 0;
-	if (ch == NULL)
-		return (0);
-	while (*(ch + count))
-	{
-		count++;
-	}
-	return (count);
+	if (!str)
+		return (write(1, "(null)", 6));
+	ret = 0;
+	ret = ft_strlen(str);
+	ret = write(1, str, ret);
+	return (ret);
 }

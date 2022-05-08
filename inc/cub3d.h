@@ -87,8 +87,7 @@ typedef struct s_cub3d{
  * 
  * status:
  * 				INIT_STATE		-1	// Starting point. 
- * 				EXIT_SUCESS		0
- * 				EXIT_FAILURE	1
+ * 				SUCESS			0
  * 				ERROR			2
  * 				ERROR			3
  */
@@ -124,7 +123,12 @@ char	*ident2str(t_identifier ident);
  * VALIDATION
  */
 int		is_ext_xpm(t_parser *p);
-int		is_rgb_color(t_parser *p, int i);
+int		is_rgb_color(t_cub3d *cub, t_parser *p, int i);
+
+/*
+ * UTILS
+ */
+int	rgb_to_colorHex(int r, int g, int b);
 
 /*
  * ERROR
