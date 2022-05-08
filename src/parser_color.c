@@ -1,45 +1,76 @@
 #include "cub3d.h"
 
+static int get_rgb_colornumber(t_cub3d *cub, t_parser *p, int i)
+{
+	int nbr;
+
+	if (ft_atoi_ext(p->split[i], &nbr))
+	{
+		if ((nbr < 0) || (nbr > 255))
+		{
+			p->status = 6; //Error: RGB color smaller than 0 or bigger than 255
+			return (EXIT_FAILURE);
+		}
+		else if (i == 0)
+			cub->color[p->ident].r = nbr;
+		else if (i == 1)
+			cub->color[p->ident].g = nbr;
+		else if (i == 2)
+			cub->color[p->ident].b = nbr;
+	}
+	else
+	{
+		p->status = 5; //Error: RGB color is not digit
+		return (EXIT_FAILURE);
+	}
+	return(EXIT_SUCCESS);
+}
+
 static void map_find_rgb(t_cub3d *cub, t_parser *p)
 {
 	int	i;
 
+	if ( (!p->line) || (ft_strlen(p->line) < 6) || (p->line[0] == '\n'))
+	{
+		p->status = 4; //Error:[4] something wrong with RGB colors in the map
+		return ;
+	}
 	p->split = ft_split(p->line, ',');
 	i = 0;
 	while(i < 3)
 	{
-		if (is_rgb_color(cub, p, i)) 
+		if (!p->split[i])
+		{
+			p->status = 4; // Error: missing RGB color in the map
+			return ;
+		}
+		if (get_rgb_colornumber(cub, p, i)) 
 			return ;
 		i++;
 	}
 	if (i == 3)
 	{
+		cub->color[p->ident].rgb = rgb_to_colorHex(cub->color[p->ident].r,
+			cub->color[p->ident].g, cub->color[p->ident].b);
 		p->status = 0;
+		printf("......color rgb:%d \n", cub->color[p->ident].rgb);
 	}
 }
 
 static void map_find_colorId(t_cub3d *cub, t_parser *p)
 {
-	// find line with C or F
 	while(p->line && (p->status == -1))
 	{
-		// LIne with C or F
 		if (ft_strnstr(p->line, ident2str(p->ident),
 			ft_strlen(ident2str(p->ident))))
 		{
-			printf("......Found color line:%s \n", p->line);
 			p->start_line = p->line; //copy the address to free after.
 			p->line++;
 			while(p->line && *(p->line) && ft_strchr(" \t\r", *(p->line))) // remove spaces, tab, ....etc
 				p->line++;
 			printf("......Found color no-spaces:%s \n", p->line);
 			if (cub->color[p->ident].used == COLOR_NO_USED)
-			{
-				if ( (!p->line) || (ft_strlen(p->line) < 6) || (p->line[0] == '\n') )
-					p->status = 4; //Error:[4] something wrong with RGB colors in the map
-				else
-					map_find_rgb(cub, p); // Line with rgb colors.
-			}
+				map_find_rgb(cub, p); // Line with rgb colors.
 			else
 				p->status = 3; //Error: color is repited in the map\n"));
 			free(p->start_line);
@@ -75,7 +106,7 @@ static int	map_find_identifier(t_cub3d *cub, t_identifier ident, char *cub_map)
 	if(pars.status == 5)
 		return(error_exit_failure("Error: RGB color is not digit\n"));
 	if(pars.status == 6)
-		return(error_exit_failure("Error: wrong range: RGB color smaller than 0 or biger than 255\n"));
+		return(error_exit_failure("Error: wrong range: RGB color smaller than 0 or bigger than 255\n"));
 	return (EXIT_SUCCESS);
 }
 

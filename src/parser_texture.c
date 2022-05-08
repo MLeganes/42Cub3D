@@ -4,15 +4,15 @@ char	*ident2str(t_identifier ident)
 {
 	if (ident == ID_NO)
 		return ("NO");
-	else if (ident == ID_SO)
+	if (ident == ID_SO)
 		return ("SO");
-	else if (ident == ID_WE)
+	if (ident == ID_WE)
 		return ("WE");
-	else if (ident == ID_EA)
+	if (ident == ID_EA)
 		return ("EA");
-	else if (ident == ID_F)
+	if (ident == ID_F)
 		return ("F");
-	else if (ident == ID_C)
+	if (ident == ID_C)
 		return ("C");
 	return (NULL);
 }
@@ -31,14 +31,14 @@ static void map_find_path_xpm(t_cub3d *cub, t_parser *p)
 				p->line++;
 			if(is_ext_xpm(p))
 			{
-				if (cub->img[p->ident]->path_tex == NULL)
-				{
+				// if (cub->img[p->ident]->path_tex == NULL)
+				// {
 					cub->img[p->ident]->path_tex = ft_strdup(p->line);
 					p->status = 0;
 					printf("......Found path theme: %s \n", cub->img[p->ident]->path_tex);
-				}
-				else
-					p->status = 3; //Texture repited, error!!!!!
+				// }
+				// else
+				// 	p->status = 3; //Texture repited, error!!!!!
 			}
 			else
 				p->status = 2; //Error: wrong path or wrong extension in the theme\n

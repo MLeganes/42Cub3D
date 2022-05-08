@@ -123,7 +123,6 @@ char	*ident2str(t_identifier ident);
  * VALIDATION
  */
 int		is_ext_xpm(t_parser *p);
-int		is_rgb_color(t_cub3d *cub, t_parser *p, int i);
 
 /*
  * UTILS
