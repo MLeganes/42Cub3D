@@ -27,6 +27,7 @@ typedef enum e_identifier
 	ID_EA,
 	ID_F,
 	ID_C,
+	ID_MAP,
 }	t_identifier;
 
 typedef struct s_img

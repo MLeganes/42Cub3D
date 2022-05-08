@@ -10,6 +10,9 @@ int parser(char *path, t_cub3d *cub)
 	
 	if (parser_color(cub, path))
 		return (EXIT_FAILURE);
-	
+
+	// f (parser_map(cub, path))
+	// 	return (EXIT_FAILURE);
+
 	return (EXIT_SUCCESS);
 }
