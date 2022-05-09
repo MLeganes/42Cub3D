@@ -14,7 +14,6 @@ void cub3d_init(t_cub3d *cub)
 	cub->color[ID_C].rgb = -1;
 	cub->color[ID_C].used = COLOR_NO_USED;
 
-
 	cub->color[ID_F].r = -1; 
 	cub->color[ID_F].g = -1; 
 	cub->color[ID_F].b = -1; 
@@ -27,7 +26,7 @@ int	main(int argcnt, char **args)
 	t_cub3d	cub;
 
 	if (argcnt != 2)
-		exit (error_exit_failure("Error: Incorrect arguments!\n"));
+		exit (err_fail("Error: Incorrect arguments!\n"));
 	
 	cub3d_init(&cub);
 

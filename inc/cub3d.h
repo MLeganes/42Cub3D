@@ -28,6 +28,7 @@ typedef enum e_identifier
 	ID_F,
 	ID_C,
 	ID_MAP,
+	ID_NONE,
 }	t_identifier;
 
 typedef struct s_img
@@ -100,6 +101,8 @@ typedef struct s_parser_helper
 	char			*line;
 	char			*start_line;
 	char			**split;
+	int				nolines;
+	char			**map;
 }					t_parser;
 
 
@@ -114,8 +117,14 @@ typedef struct s_parser_helper
 /*
  * PARSER
  */
+//new functions
 int		parser(char *path, t_cub3d *cub);
 void	parser_init(t_parser *pars, t_identifier ident);
+int		parser_openfd(t_parser *pars, char *path);
+int		parser_readfd(t_parser *p);
+int		parser_closefd(t_parser *pars);
+
+//old functions
 int		parser_texture(t_cub3d *cub, char *path_cub);
 int		parser_color(t_cub3d *cub, char *path_cub);
 char	*ident2str(t_identifier ident);
@@ -124,6 +133,7 @@ char	*ident2str(t_identifier ident);
  * VALIDATION
  */
 int		is_ext_xpm(t_parser *p);
+int		is_ext_cub(char *path);
 
 /*
  * UTILS
@@ -133,6 +143,6 @@ int	rgb_to_colorHex(int r, int g, int b);
 /*
  * ERROR
  */
-int		error_exit_failure(char *msg);
+int		err_fail(char *msg);
 
 #endif
