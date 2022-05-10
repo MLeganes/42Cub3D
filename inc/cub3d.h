@@ -135,8 +135,8 @@ char	*ident2str(t_identifier ident);
 /*
  * VALIDATION
  */
-int		is_ext_xpm(t_parser *p);
 int		is_ext_cub(char *path);
+int		is_ext_xpm(t_parser *p);
 
 /*
  * UTILS
@@ -147,5 +147,6 @@ int	rgb_to_colorHex(int r, int g, int b);
  * ERROR
  */
 int		err_fail(char *msg);
+int		err_fail2(char *msg1, char *msg2);
 
 #endif

@@ -8,6 +8,11 @@ void cub3d_init(t_cub3d *cub)
 	cub->img[ID_WE] = malloc(sizeof(t_img)); 
 	cub->img[ID_EA] = malloc(sizeof(t_img)); 
 
+	cub->img[ID_NO]->path_tex = NULL;
+	cub->img[ID_SO]->path_tex = NULL;
+	cub->img[ID_WE]->path_tex = NULL;
+	cub->img[ID_EA]->path_tex = NULL;
+
 	cub->color[ID_C].r = -1; 
 	cub->color[ID_C].g = -1; 
 	cub->color[ID_C].b = -1; 
