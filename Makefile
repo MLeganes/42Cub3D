@@ -8,7 +8,7 @@ O			=	obj/
 OBJS		=	$(patsubst $S%.c, $O%.o, $(SRCS))
 SRCS		=	$Scub3d.c \
 				$Serror.c \
-				$Sparser.c $Sparser_fd.c $Sparser_texture.c $Sparser_color.c \
+				$Sparser.c $Sparser_fd.c $Sparser_identifier.c $Sparser_color.c \
 				$Svalidation.c \
 				$Sutils1.c \
 

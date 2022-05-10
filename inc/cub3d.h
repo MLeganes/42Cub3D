@@ -125,12 +125,10 @@ typedef struct s_parser_helper
 //new functions
 int		parser(char *path, t_cub3d *cub);
 void	parser_init(t_parser *pars, t_identifier ident);
-int		parser_openfd(t_parser *pars, char *path);
 int		parser_readfd(t_parser *p, char *path);
-int		parser_closefd(t_parser *pars);
+int		parser_identifier(t_cub3d *cub, t_parser *p);
 
 //old functions
-int		parser_texture(t_cub3d *cub, char *path_cub);
 int		parser_color(t_cub3d *cub, char *path_cub);
 char	*ident2str(t_identifier ident);
 

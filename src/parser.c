@@ -16,7 +16,6 @@ void	parser_init(t_parser *pars, t_identifier ident)
 int parser(char *path, t_cub3d *cub)
 {
 	t_parser pars;
-	int		i;
 	
 	parser_init(&pars, ID_NONE); 
 	if (is_ext_cub(path))
@@ -25,18 +24,19 @@ int parser(char *path, t_cub3d *cub)
 		return (EXIT_FAILURE);
 
 	// testing
-	printf("Lines in .cub file: %d\n", pars.nolines);
-	i =0;
-	printf("........PRINT MY FILE IN MEMORY\n");
-	while ( pars.map && pars.map[i])
-	{
-		printf("%i %s",i, pars.map[i]);
-		i++;
-		/* code */
-	}
+	// printf("Lines in .cub file: %d\n", pars.nolines);
+	// int		i;
+	// i =0;
+	// printf("........PRINT MY FILE IN MEMORY\n");
+	// while ( pars.map && pars.map[i])
+	// {
+	// 	printf("%i %s",i, pars.map[i]);
+	// 	i++;
+	// 	/* code */
+	// }
 	//end testing
 
-	if (parser_identifiers(cub, path))
+	if (parser_identifier(cub, &pars))
 		return (EXIT_FAILURE);
 	// if (parser_map(cub, path))
 	// 	return (EXIT_FAILURE);

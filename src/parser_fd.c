@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int parser_openfd(t_parser *pars, char *path)
+static int parser_openfd(t_parser *pars, char *path)
 {
 	pars->fd = open(path, O_RDONLY);
 	if (pars->fd == -1)
@@ -8,7 +8,7 @@ int parser_openfd(t_parser *pars, char *path)
 	return (EXIT_SUCCESS);
 }
 
-int parser_closefd(t_parser *pars)
+static int parser_closefd(t_parser *pars)
 {
 	pars->fd = close(pars->fd);
 	if (pars->fd == -1)
