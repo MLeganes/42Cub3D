@@ -101,9 +101,9 @@ typedef struct s_parser_helper
 {
 	int				fd;
 	int				status;
-	t_identifier	ident;
+//	t_identifier	ident;
 	char			*line;
-	char			*start_line;
+	//char			*start_line;
 	char			**split;
 	int				idx;
 	int				nolines;
@@ -124,9 +124,10 @@ typedef struct s_parser_helper
  */
 //new functions
 int		parser(char *path, t_cub3d *cub);
-void	parser_init(t_parser *pars, t_identifier ident);
+void	parser_init(t_parser *pars);
 int		parser_readfd(t_parser *p, char *path);
 int		parser_identifier(t_cub3d *cub, t_parser *p);
+int		identifier_color(t_cub3d *cub, t_parser *p, char c);
 
 //old functions
 int		parser_color(t_cub3d *cub, char *path_cub);

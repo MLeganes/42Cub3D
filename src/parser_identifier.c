@@ -64,10 +64,11 @@ static int	identifier_selector(t_cub3d *cub, t_parser *p)
 		if (identifier_texture(cub, p, ID_EA))
 			return (EXIT_FAILURE);
 	}
-	else if ( ft_strnstr(p->map[p->idx], "C", 1) || ft_strnstr(p->map[p->idx], "F", 1))
+	//else if ( ft_strnstr(p->map[p->idx], "C", 1) || ft_strnstr(p->map[p->idx], "F", 1))
+	else if ((p->map[p->idx][0] == 'C') || (p->map[p->idx][0] == 'F'))
 	{
-		// if (identifier_color(cub, p, 'C'))
-			return (EXIT_FAILURE);	
+		if (identifier_color(cub, p, p->map[p->idx][0]))
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 
@@ -83,7 +84,6 @@ static int	identifier_selector(t_cub3d *cub, t_parser *p)
 int	parser_identifier(t_cub3d *cub, t_parser *p)
 {
 	p->idx = 0;
-	(void)cub;
 
 	while (p->map[p->idx])
 	{
