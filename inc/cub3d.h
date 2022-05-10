@@ -25,11 +25,15 @@ typedef enum e_identifier
 	ID_SO,
 	ID_WE,
 	ID_EA,
-	ID_F,
-	ID_C,
 	ID_MAP,
 	ID_NONE,
 }	t_identifier;
+
+typedef enum e_identifier_color
+{
+	ID_F,
+	ID_C,
+}	t_identcolor;
 
 typedef struct s_img
 {
@@ -41,8 +45,8 @@ typedef struct s_img
  * t_color
  * 
  * used:
- * 				NO_USED			-1
- * 				IN_USE			0
+ * 			NO_USED	-1
+ * 			IN_USE	0
  */
 typedef struct s_color
 {
