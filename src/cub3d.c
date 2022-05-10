@@ -33,6 +33,6 @@ int	main(int argcnt, char **args)
 	if (parser(args[1], &cub))
 		exit (EXIT_FAILURE);
 
-	system("leaks cub3d");
+	//system("leaks cub3d");
 	exit (EXIT_SUCCESS);
 }

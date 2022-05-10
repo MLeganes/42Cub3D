@@ -101,6 +101,7 @@ typedef struct s_parser_helper
 	char			*line;
 	char			*start_line;
 	char			**split;
+	int				idx;
 	int				nolines;
 	char			**map;
 }					t_parser;
@@ -121,7 +122,7 @@ typedef struct s_parser_helper
 int		parser(char *path, t_cub3d *cub);
 void	parser_init(t_parser *pars, t_identifier ident);
 int		parser_openfd(t_parser *pars, char *path);
-int		parser_readfd(t_parser *p);
+int		parser_readfd(t_parser *p, char *path);
 int		parser_closefd(t_parser *pars);
 
 //old functions

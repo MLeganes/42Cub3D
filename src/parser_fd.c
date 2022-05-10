@@ -16,47 +16,48 @@ int parser_closefd(t_parser *pars)
 	return (EXIT_SUCCESS);
 }
 
-static int map_add_line(t_parser **p)
+static int parser_readfdlines(t_parser *p, char *path)
 {
-	char	**tmp;
-	int		i;
-
-	tmp = malloc(sizeof(char *) * ( (*p)->nolines + 2));
-	if (tmp == NULL)
+	p->nolines = 0;
+	if (parser_openfd(p, path))
 		return (EXIT_FAILURE);
-	i = 0;
-	if((*p)->map == NULL)
-	{
-		tmp[0] = ft_strdup((*p)->line);
-		tmp[1] = NULL;
-	}
-	else
-	{
-		while((*p)->map[i])
-		{
-			printf("While %d  %s\n",i ,(*p)->map[i]);
-			tmp[i] = (*p)->map[i];
-			i++;
-		}
-		tmp[i] = ft_strdup((*p)->line);
-		tmp[i++] = NULL;
-		free((*p)->map);
-	}
-	(*p)->map = tmp;
-	(*p)->nolines++;	
-	return (EXIT_SUCCESS);
-}
-
-int parser_readfd(t_parser *p)
-{
 	p->line = get_next_line(p->fd);
 	while (p->line)
 	{
-		if (map_add_line(&p))
-			return (EXIT_FAILURE);
+		p->nolines++;
 		free(p->line);
 		p->line = get_next_line(p->fd);
 	}
+	if (parser_closefd(p))
+		return (EXIT_FAILURE);
+
+	p->map = (char **)malloc(sizeof(char *) * (p->nolines + 1));
+	if (p->map == NULL)
+		return(err_fail("Error: problem in malloc\n"));
+	return (EXIT_SUCCESS);
+}
+
+int parser_readfd(t_parser *p, char *path)
+{
+	if (parser_readfdlines(p, path))
+		return (EXIT_FAILURE);
+
+	if (parser_openfd(p, path))
+		return (EXIT_FAILURE);
+
+	p->line = get_next_line(p->fd);
+	while (p->line)
+	{
+		p->map[p->idx] = p->line;
+		p->idx++;
+		p->map[p->idx] = NULL;
+		p->line = NULL;
+		p->line = get_next_line(p->fd);
+	}
+	p->map[p->idx] = NULL;
 	//[possible]remove tabs by white-spaces
+
+	if (parser_closefd(p))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
