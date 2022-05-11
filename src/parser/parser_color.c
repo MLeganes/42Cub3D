@@ -1,12 +1,17 @@
 #include "cub3d.h"
 
-char	*identcolor2str(t_identcolor ident)
+static char	*identcolor2str(t_identcolor ident)
 {
 	if (ident == ID_C)
 		return ("C");
 	if (ident == ID_F)
 		return ("F");
 	return (NULL);
+}
+
+static int	rgb_to_colorHex(int r, int g, int b)
+{
+	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
 static int get_rgb_colornumber(t_cub3d *cub, t_parser *p, int i, t_identcolor id)

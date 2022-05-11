@@ -18,10 +18,8 @@ int parser(char *path, t_cub3d *cub)
 
 	if (is_ext_cub(path))
 		return(EXIT_FAILURE);
-
 	if (parser_readfd(&pars, path))
 		return (EXIT_FAILURE);
-
 	if (parser_identifier(cub, &pars))
 		return (EXIT_FAILURE);
 	if (parser_map(cub, &pars, path))

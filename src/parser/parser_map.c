@@ -1,8 +1,11 @@
 #include "cub3d.h"
 
+
+
 int	parser_map(t_cub3d *cub, t_parser *p, char *path_cub)
 {
-	//t_parser pars;
+	p->idx = 0;
+
 	(void)cub;
 	(void)path_cub;
 	(void)p;
