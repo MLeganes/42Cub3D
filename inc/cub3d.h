@@ -44,11 +44,11 @@ typedef struct s_img
 
 /********
  * t_color
- * 
+ *
  * used:
  * 			COLOR_NO_USED	-1
  *			COLOR_IN_USE	0
- * 
+ *
  */
 typedef struct s_color
 {
@@ -67,8 +67,8 @@ typedef struct s_map
 }			t_map;
 
 typedef struct s_cor{
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 }			t_cor;
 
 typedef struct s_cub3d{
@@ -129,5 +129,10 @@ int		is_path(char *path);
  */
 int		err_fail(char *msg);
 int		err_fail2(char *msg1, char *msg2);
+
+/*
+ * FRAME
+ */
+void	test_frame(void);
 
 #endif
