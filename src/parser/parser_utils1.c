@@ -47,3 +47,24 @@ int		is_space(char c)
 	else
 		return (0);
 }
+
+void	remove_eol(t_parser *p)
+{
+
+	int	i;
+	int	j;
+
+	i = 0;
+	while (p->map[i])
+	{
+		j = 0;
+		while (p->map[i][j])
+		{
+			if (p->map[i][j] == '\n')
+				p->map[i][j] = '\0';
+			j++;
+		}
+		i++;
+	}
+	return ;
+}

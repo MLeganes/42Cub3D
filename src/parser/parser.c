@@ -24,8 +24,8 @@ int parser(char *path, t_cub3d *cub)
 	if (parser_identifier(cub, &pars))
 		return (EXIT_FAILURE);
 
-	// if (parser_map(cub, &pars))
-	// 	return (EXIT_FAILURE);
+	if (parser_map(cub, &pars))
+		return (EXIT_FAILURE);
 
 	/**
 	 * @todos 

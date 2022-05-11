@@ -123,6 +123,7 @@ int		is_ext_cub(char *path);
 int		is_ext_xpm(t_parser *p);
 int		is_space(char c);
 int		is_path(char *path);
+void	remove_eol(t_parser *p);
 
 /*
  * ERROR

@@ -103,13 +103,28 @@ static int is_valid_map(t_parser *p)
 int	parser_map(t_cub3d *cub, t_parser *p)
 {
 	(void)cub;
+	printf("\n\n **** PARSING MAP *****\n\n");
+
+	remove_eol(p);
 
 	p->idx = 0;
+	//1
 	while (p->map[p->idx] && !is_map_chars(p->map[p->idx]))
 		p->idx++;
+	//2
 	if (!p->map[p->idx])
 		return(err_fail("No map to parser in file cup\n"));
-	if (is_valid_map(p) == 0)
-		return(err_fail("No valid map in file cup\n"));
+	//3
+	if (!is_valid_map(p))
+		return(err_fail("No valid map in .cup file\n"));
+	//4
+	while (p->map[p->idx] && is_map_chars(p->map[p->idx + 1]))
+	{
+		p->idx++;
+	}
+
+	//5 Free parser
+	
+
 	return (EXIT_SUCCESS);
 }

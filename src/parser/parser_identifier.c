@@ -71,6 +71,7 @@ int	parser_identifier(t_cub3d *cub, t_parser *p)
 {
 	p->idx = 0;
 
+	printf("\n **** PARSING ID texture and colors *****\n");
 	while (p->map[p->idx])
 	{
 		if (identifier_selector(cub, p))
