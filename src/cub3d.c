@@ -31,13 +31,13 @@ int	main(int argcnt, char **args)
 	t_cub3d	cub;
 
 	if (argcnt != 2)
-		exit (err_fail("Error: Incorrect arguments!\n"));
+		exit (err_fail("Incorrect arguments!\n"));
 	
 	cub3d_init(&cub);
 
 	if (parser(args[1], &cub))
-		exit (EXIT_FAILURE);
+		exit (err_fail("Main-Parser fail\n"));
 
-	//system("leaks cub3d");
+//	system("leaks cub3d");
 	exit (EXIT_SUCCESS);
 }

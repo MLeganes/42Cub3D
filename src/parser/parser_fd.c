@@ -4,7 +4,7 @@ static int parser_openfd(t_parser *pars, char *path)
 {
 	pars->fd = open(path, O_RDONLY);
 	if (pars->fd == -1)
-		return (err_fail("Error: No such file or directory\n"));
+		return (err_fail("No such file or directory\n"));
 	return (EXIT_SUCCESS);
 }
 
@@ -12,7 +12,7 @@ static int parser_closefd(t_parser *pars)
 {
 	pars->fd = close(pars->fd);
 	if (pars->fd == -1)
-		return (err_fail("Error: Closing file descriptor\n"));
+		return (err_fail("Closing file descriptor\n"));
 	return (EXIT_SUCCESS);
 }
 
@@ -32,7 +32,7 @@ static int parser_readfdlines(t_parser *p, char *path)
 		return (EXIT_FAILURE);
 	p->map = (char **)malloc(sizeof(char *) * (p->nolines + 1));
 	if (p->map == NULL)
-		return(err_fail("Error: problem in malloc\n"));
+		return(err_fail("Problem in malloc\n"));
 	return (EXIT_SUCCESS);
 }
 

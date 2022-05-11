@@ -8,6 +8,7 @@ void	parser_init(t_parser *pars)
 	pars->nolines = 0;
 	pars->idx = 0;
 	pars->map = NULL;
+	pars->player = '\0';
 }
 
 int parser(char *path, t_cub3d *cub)
@@ -22,8 +23,9 @@ int parser(char *path, t_cub3d *cub)
 		return (EXIT_FAILURE);
 	if (parser_identifier(cub, &pars))
 		return (EXIT_FAILURE);
-	if (parser_map(cub, &pars, path))
-		return (EXIT_FAILURE);
+
+	// if (parser_map(cub, &pars))
+	// 	return (EXIT_FAILURE);
 
 	/**
 	 * @todos 

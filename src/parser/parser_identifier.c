@@ -16,29 +16,25 @@ char	*ident2str(t_identifier ident)
 static int identifier_texture(t_cub3d *cub, t_parser *p, t_identifier id)
 {
 	p->line = p->map[p->idx];
-	if (ft_strnstr(p->line, ident2str(id),
-		ft_strlen(ident2str(id))))
+	p->line = p->line + 2;
+	while(p->line && *(p->line) && ft_strchr(" \t\r", *(p->line)))
+		p->line++;
+	if(is_ext_xpm(p) == EXIT_SUCCESS)
 	{
-		p->line = p->line + 2;
-		while(p->line && *(p->line) && ft_strchr(" \t\r", *(p->line)))
-			p->line++;
-		p->line[ft_strlen(p->line) - 1] = '\0'; //remove \n
-		if(is_ext_xpm(p) == EXIT_SUCCESS)
+		if (cub->img[id]->path_tex == NULL)
 		{
-			if (cub->img[id]->path_tex == NULL)
-			{
-				cub->img[id]->path_tex = ft_strdup(p->line);
-				printf("Paht for the img %s \n", cub->img[id]->path_tex);
-				return (EXIT_SUCCESS);
-			}
-			else
-				return (err_fail2("Error: Texture repited ", p->line)); //p->status = 3; //Texture repited, error!!!!!
+			cub->img[id]->path_tex = ft_strdup(p->line);
+			cub->img[id]->path_tex[ft_strlen(p->line) - 1] = '\0';
+			if (is_path(cub->img[id]->path_tex))
+				return (EXIT_FAILURE);
+			p->line = NULL;
+			printf("Paht for the img WORKING %s \n", cub->img[id]->path_tex);
+			return (EXIT_SUCCESS);
 		}
 		else
-			return (EXIT_FAILURE);	//Error: wrong path or wrong extension in the theme\n
+			return (err_fail2("Texture repited ", p->line)); //p->status = 3; //Texture repited, error!!!!!
 	}
-	p->line = NULL;
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);	//Error: wrong path or wrong extension in the theme\n
 }
 
 static int	identifier_selector(t_cub3d *cub, t_parser *p)

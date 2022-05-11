@@ -21,7 +21,7 @@ static int get_rgb_colornumber(t_cub3d *cub, t_parser *p, int i, t_identcolor id
 	if (ft_atoi_ext(p->split[i], &nbr))
 	{
 		if ((nbr < 0) || (nbr > 255))
-			return (err_fail2("Error: RGB color smaller than 0 or bigger than 255 in ", identcolor2str(id)));
+			return (err_fail2("RGB color smaller than 0 or bigger than 255 in ", identcolor2str(id)));
 		else if (i == 0)
 			cub->color[id].r = nbr;
 		else if (i == 1)
@@ -31,7 +31,7 @@ static int get_rgb_colornumber(t_cub3d *cub, t_parser *p, int i, t_identcolor id
 		return(EXIT_SUCCESS);
 	}
 	else
-		return (err_fail2("Error: RGB color is not digit in ", identcolor2str(id)));
+		return (err_fail2("RGB color is not digit in ", identcolor2str(id)));
 }
 
 
@@ -40,13 +40,13 @@ static int get_rgb(t_cub3d *cub, t_parser *p, t_identcolor id)
 	int	i;
 
 	if ((!p->line) || (ft_strlen(p->line) < 6) || (p->line[0] == '\n'))
-		return (err_fail2("Error: something missing in RGB colors in ", identcolor2str(id)));
+		return (err_fail2("Something missing in RGB colors in ", identcolor2str(id)));
 	p->split = ft_split(p->line, ',');
 	i = 0;
 	while(i < 3)
 	{
 		if (!p->split[i])
-			return (err_fail2("Error: missing RGB color in the ", identcolor2str(id)));
+			return (err_fail2("Missing RGB color in the ", identcolor2str(id)));
 		if (get_rgb_colornumber(cub, p, i, id)) 
 			return (EXIT_FAILURE);
 		i++;
@@ -75,7 +75,7 @@ int identifier_color(t_cub3d *cub, t_parser *p, char c)
 		if (cub->color[ID_C].used == COLOR_NO_USED)
 			return (get_rgb(cub, p, ID_C)); // Line with rgb colors.
 		else
-			return (err_fail2("Error: color is repited in the map ", p->map[p->idx]));
+			return (err_fail2("Color is repited in the map ", p->map[p->idx]));
 	}
 	if (c == 'F')
 	{
@@ -83,7 +83,7 @@ int identifier_color(t_cub3d *cub, t_parser *p, char c)
 		if (cub->color[ID_F].used == COLOR_NO_USED)
 			return (get_rgb(cub, p, ID_F)); // Line with rgb colors.
 		else
-			return (err_fail2("Error: color is repited in the map ", p->map[p->idx]));
+			return (err_fail2("Color is repited in the map ", p->map[p->idx]));
 	}
 	return (EXIT_SUCCESS);
 }
