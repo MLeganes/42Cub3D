@@ -128,21 +128,17 @@ void	parser_init(t_parser *pars);
 int		parser_readfd(t_parser *p, char *path);
 int		parser_identifier(t_cub3d *cub, t_parser *p);
 int		identifier_color(t_cub3d *cub, t_parser *p, char c);
+char	*ident2str(t_identifier ident);
 
 //old functions
 int		parser_color(t_cub3d *cub, char *path_cub);
-char	*ident2str(t_identifier ident);
-
-/*
- * VALIDATION
- */
-int		is_ext_cub(char *path);
-int		is_ext_xpm(t_parser *p);
 
 /*
  * UTILS
  */
-int	rgb_to_colorHex(int r, int g, int b);
+int		is_ext_cub(char *path);
+int		is_ext_xpm(t_parser *p);
+int		rgb_to_colorHex(int r, int g, int b);
 
 /*
  * ERROR

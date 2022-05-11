@@ -4,13 +4,12 @@ FLAGS		=	-Wall -Wextra -Werror -g
 
 S			=	src/
 O			=	obj/
+P			=	parser/
 
 OBJS		=	$(patsubst $S%.c, $O%.o, $(SRCS))
 SRCS		=	$Scub3d.c \
 				$Serror.c \
-				$Sparser.c $Sparser_fd.c $Sparser_identifier.c $Sparser_color.c \
-				$Svalidation.c \
-				$Sutils1.c \
+				$S$Pparser.c $S$Pparser_fd.c $S$Pparser_identifier.c $S$Pparser_color.c $S$Pparser_map.c $S$Pparser_utils1.c \
 
 # CONFIGURATION FOR LIB AND INC
 
@@ -38,6 +37,7 @@ $(NAME):	libft/libft.a $(OBJS)
 # Compiling...
 $O%.o:		$S%.c
 			@[ -d $(O) ]	 || mkdir -p $(O)
+			@[ -d $(O)$(P) ] || mkdir -p $(O)$(P)
 			@echo "\033[1;32m$(NAME)\033[1;0m\033[32m compiling...\033[0m"
 			@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
