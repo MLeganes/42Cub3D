@@ -30,7 +30,6 @@ static int parser_readfdlines(t_parser *p, char *path)
 	}
 	if (parser_closefd(p))
 		return (EXIT_FAILURE);
-
 	p->map = (char **)malloc(sizeof(char *) * (p->nolines + 1));
 	if (p->map == NULL)
 		return(err_fail("Error: problem in malloc\n"));
@@ -41,10 +40,8 @@ int parser_readfd(t_parser *p, char *path)
 {
 	if (parser_readfdlines(p, path))
 		return (EXIT_FAILURE);
-
 	if (parser_openfd(p, path))
 		return (EXIT_FAILURE);
-
 	p->line = get_next_line(p->fd);
 	while (p->line)
 	{
@@ -56,7 +53,6 @@ int parser_readfd(t_parser *p, char *path)
 	}
 	p->map[p->idx] = NULL;
 	//[possible]remove tabs by white-spaces
-
 	if (parser_closefd(p))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

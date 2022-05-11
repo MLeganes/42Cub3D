@@ -41,6 +41,14 @@ int parser(char *path, t_cub3d *cub)
 	// if (parser_map(cub, path))
 	// 	return (EXIT_FAILURE);
 
+	/**
+	 * @todos 
+	 * 
+	 *    1). Check if there are all texture and color in the struct, before keep going
+	 *    2). 
+	 * 
+	 */
+
 	// free_parser(&parser);//If needed, yes map!!
 	return (EXIT_SUCCESS);
 }

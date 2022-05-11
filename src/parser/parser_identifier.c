@@ -64,21 +64,12 @@ static int	identifier_selector(t_cub3d *cub, t_parser *p)
 		if (identifier_texture(cub, p, ID_EA))
 			return (EXIT_FAILURE);
 	}
-	//else if ( ft_strnstr(p->map[p->idx], "C", 1) || ft_strnstr(p->map[p->idx], "F", 1))
 	else if ((p->map[p->idx][0] == 'C') || (p->map[p->idx][0] == 'F'))
 	{
 		if (identifier_color(cub, p, p->map[p->idx][0]))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
-
-	//map_find_path_xpm(cub, &pars);
-	// if (p.status == -1)
-	// 	return(err_fail("Error: missing identifier for the texture in the map\n"));
-	// if(p.status == 2)
-	// 	return(err_fail("Error: wrong extension in the texture\n"));
-	// if(p.status == 3)
-	// 	return(err_fail("Error: texture repited in the map\n"));
 }
 
 int	parser_identifier(t_cub3d *cub, t_parser *p)
