@@ -15,12 +15,12 @@ SRCS		=	$Scub3d.c \
 # CONFIGURATION FOR LIB AND INC
 
 # To run in iMac wit libmlx.
-#LIBRARIES	=	-Llibft -lft -Llibmlx -lmlx -framework OpenGL -framework AppKit
-#INCLUDES	=	-I ./inc -Ilibft -Ilibmlx
+LIBRARIES	=	-Llibft -lft -Llibmlx -lmlx -framework OpenGL -framework AppKit
+INCLUDES	=	-I ./inc -Ilibft -Ilibmlx
 
 # To run in Linux without libmlx.
-LIBRARIES	=	-Llibft -lft 
-INCLUDES	=	-I ./inc -Ilibft
+#LIBRARIES	=	-Llibft -lft
+#INCLUDES	=	-I ./inc -Ilibft
 
 
 all:		$(NAME)
