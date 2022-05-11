@@ -1,16 +1,12 @@
 #include "cub3d.h"
 
-
-
-
-
-
-
-int	parser_map(t_cub3d *cub, char *path_cub)
+int	parser_map(t_cub3d *cub, t_parser *p, char *path_cub)
 {
 	//t_parser pars;
 	(void)cub;
 	(void)path_cub;
+	(void)p;
+
 	
 	// parser_init(&pars, ID_MAP);
 	// pars.fd = open(path_cub, O_RDONLY);

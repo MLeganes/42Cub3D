@@ -29,7 +29,6 @@ static int identifier_texture(t_cub3d *cub, t_parser *p, t_identifier id)
 			{
 				cub->img[id]->path_tex = ft_strdup(p->line);
 				printf("Paht for the img %s \n", cub->img[id]->path_tex);
-				p->status = 0;
 				return (EXIT_SUCCESS);
 			}
 			else

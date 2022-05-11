@@ -52,7 +52,6 @@ int parser_readfd(t_parser *p, char *path)
 		p->line = get_next_line(p->fd);
 	}
 	p->map[p->idx] = NULL;
-	//[possible]remove tabs by white-spaces
 	if (parser_closefd(p))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

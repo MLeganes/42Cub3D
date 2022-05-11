@@ -100,10 +100,7 @@ typedef struct s_cub3d{
 typedef struct s_parser_helper
 {
 	int				fd;
-	int				status;
-//	t_identifier	ident;
 	char			*line;
-	//char			*start_line;
 	char			**split;
 	int				idx;
 	int				nolines;
@@ -128,10 +125,12 @@ void	parser_init(t_parser *pars);
 int		parser_readfd(t_parser *p, char *path);
 int		parser_identifier(t_cub3d *cub, t_parser *p);
 int		identifier_color(t_cub3d *cub, t_parser *p, char c);
+int	parser_map(t_cub3d *cub, t_parser *p, char *path_cub);
+
 char	*ident2str(t_identifier ident);
 
 //old functions
-int		parser_color(t_cub3d *cub, char *path_cub);
+//int		parser_color(t_cub3d *cub, char *path_cub);
 
 /*
  * UTILS
