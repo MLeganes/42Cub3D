@@ -20,6 +20,8 @@
 # define COLOR_NO_USED	-1
 # define COLOR_IN_USE	0
 # define MAP_CHARS "012NSEW"
+# define MAP_INSIDE "02NSEW"
+# define MAP_PLAYER "NSEW"
 
 typedef enum e_identifier
 {

@@ -13,6 +13,7 @@ static int is_map_chars(char *line)
 	return (1);
 }
 
+// Check horizontal 
 static int is_map_wall(char *line)
 {
 	while (*line)
@@ -21,7 +22,7 @@ static int is_map_wall(char *line)
 			return (0);
 		line++;
 	}
-	return (1);
+	return (1); //When all 1s, return 1.
 }
 
 static int is_player(t_parser *p)
@@ -60,12 +61,28 @@ static int is_map_closed(char **map)
 	while (map[0][j])
 	{
 		/* code */
-		if (ft_strchr(MAP_CHARS, map[0][j]))
+		if (ft_strchr(MAP_INSIDE, map[0][j]))
 		{
 			if (!is_map_all_sides(map, j))
 				return (0);
 		}
 		j++;
+	}
+	return (1);
+}
+
+static int find_player(char *line, t_parser *p)
+{
+	while (*line)
+	{
+		if (ft_strchr(MAP_PLAYER, *line))
+		{
+			if (!p->player)
+				p->player = *line;
+			else
+				return (0);
+		}
+		line++;
 	}
 	return (1);
 }
@@ -91,9 +108,10 @@ static int is_valid_map(t_parser *p)
 		}
 		else //here working!!!!!
 		{
-			if (!is_map_closed(&map[i]))
+			if (!is_map_closed(&map[i]) || !find_player(map[i], p))
 				return (0);
 		}
+		i++;
 	}
 	// if (!copy_map(p))
 	// 	return (0);
@@ -106,7 +124,6 @@ int	parser_map(t_cub3d *cub, t_parser *p)
 	printf("\n\n **** PARSING MAP *****\n\n");
 
 	remove_eol(p);
-
 	p->idx = 0;
 	//1
 	while (p->map[p->idx] && !is_map_chars(p->map[p->idx]))
@@ -117,14 +134,11 @@ int	parser_map(t_cub3d *cub, t_parser *p)
 	//3
 	if (!is_valid_map(p))
 		return(err_fail("No valid map in .cup file\n"));
+	
 	//4
 	while (p->map[p->idx] && is_map_chars(p->map[p->idx + 1]))
 	{
 		p->idx++;
 	}
-
-	//5 Free parser
-	
-
 	return (EXIT_SUCCESS);
 }
