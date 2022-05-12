@@ -30,7 +30,7 @@ static int parser_readfdlines(t_parser *p, char *path)
 	}
 	if (parser_closefd(p))
 		return (EXIT_FAILURE);
-	p->map = (char **)malloc(sizeof(char *) * (p->nolines + 1));
+	p->map = (char **)malloc(sizeof(char *) * (p->nolines + 2));
 	if (p->map == NULL)
 		return(err_fail("Problem in malloc\n"));
 	return (EXIT_SUCCESS);
@@ -52,6 +52,9 @@ int parser_readfd(t_parser *p, char *path)
 		p->line = get_next_line(p->fd);
 	}
 	p->map[p->idx] = NULL;
+	while ( (p->idx) <= p->nolines)
+		p->map[p->idx++] = NULL;
+
 	if (parser_closefd(p))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
