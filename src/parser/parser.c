@@ -23,7 +23,6 @@ int parser(char *path, t_cub3d *cub)
 		return (EXIT_FAILURE);
 	if (parser_identifier(cub, &pars))
 		return (EXIT_FAILURE);
-
 	if (parser_map(cub, &pars))
 		return (EXIT_FAILURE);
 

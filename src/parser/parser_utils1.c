@@ -42,7 +42,8 @@ int	is_ext_cub(char *pth)
 
 int		is_space(char c)
 {
-	if (c == ' ' || (c >= 9 && c <= 13))
+	//if (c == ' ' || (c >= 9 && c <= 13))
+	if (c == ' ')
 		return (1);
 	else
 		return (0);

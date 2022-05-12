@@ -30,8 +30,8 @@ int	main(int argcnt, char **args)
 {
 	t_cub3d	cub;
 
-	if (argcnt == 1)
-		test_frame();
+	// if (argcnt == 1)
+	// 	test_frame();
 	if (argcnt != 2)
 		exit (err_fail("Incorrect arguments!\n"));
 
@@ -39,6 +39,8 @@ int	main(int argcnt, char **args)
 
 	if (parser(args[1], &cub))
 		exit (err_fail("Main-Parser fail\n"));
+
+	test_frame(&cub);
 
 //	system("leaks cub3d");
 	exit (EXIT_SUCCESS);

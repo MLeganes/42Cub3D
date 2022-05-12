@@ -19,8 +19,8 @@
 # define MAX_COLOR		2
 # define COLOR_NO_USED	-1
 # define COLOR_IN_USE	0
-# define MAP_CHARS "012NSEW"
-# define MAP_INSIDE "02NSEW"
+# define MAP_CHARS "01NSEW"
+# define MAP_INSIDE "0NSEW"
 # define MAP_PLAYER "NSEW"
 
 typedef enum e_identifier
@@ -137,6 +137,6 @@ int		err_fail2(char *msg1, char *msg2);
 /*
  * FRAME
  */
-void	test_frame(void);
+void	test_frame(t_cub3d *cub);
 
 #endif

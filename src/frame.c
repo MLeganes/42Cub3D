@@ -2,12 +2,16 @@
 
 t_cor	get_next_contact_point(t_cor pos, t_cor vec);
 
-void	test_frame(void)
+void	test_frame(t_cub3d *cub)
 {
 	void	*win;
 	void	*mlx;
 	t_cor	pos;
 	t_cor	vec;
+
+
+	(void)cub;
+
 
 	pos.x = 0;
 	pos.y = 0;
