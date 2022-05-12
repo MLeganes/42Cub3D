@@ -50,13 +50,8 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 	return (1);
 }
 
-static int	is_valid_map(t_parser *p, t_cub3d *cub)
+static int	is_valid_map(t_parser *p, t_cub3d *cub, char **map, int i)
 {
-	int		i;
-	char	**map;
-
-	i = 0;
-	map = &p->map[p->idx];
 	while (map[i] && is_map_chars(map[i]))
 	{
 		p->imap = i;
@@ -85,6 +80,9 @@ static int	is_valid_map(t_parser *p, t_cub3d *cub)
 
 int	parser_map(t_cub3d *cub, t_parser *p)
 {
+	int		i;
+	char	**fucking25lines_map;
+
 	printf("\n\n **** PARSING MAP *****\n\n");
 	remove_eol(p);
 	p->idx = 0;
@@ -92,7 +90,9 @@ int	parser_map(t_cub3d *cub, t_parser *p)
 		p->idx++;
 	if (!p->map[p->idx])
 		return (err_fail("No map to parser in file cup\n"));
-	if (!is_valid_map(p, cub))
+	i = 0;
+	fucking25lines_map = &p->map[p->idx];
+	if (!is_valid_map(p, cub, fucking25lines_map, i))
 		return (err_fail("No valid map in .cup file\n"));
 	return (EXIT_SUCCESS);
 }

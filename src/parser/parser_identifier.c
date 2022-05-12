@@ -39,27 +39,19 @@ static int	identifier_texture(t_cub3d *cub, t_parser *p, t_identifier id)
 
 static int	identifier_selector(t_cub3d *cub, t_parser *p)
 {
-	if (ft_strnstr(p->map[p->idx], ident2str(ID_NO), 2))
+	int	i;
+
+	i = 0;
+	while (i < 4)
 	{
-		if (identifier_texture(cub, p, ID_NO))
-			return (EXIT_FAILURE);
+		if (ft_strnstr(p->map[p->idx], ident2str(i), 2))
+		{
+			if (identifier_texture(cub, p, i))
+				return (EXIT_FAILURE);
+		}
+		i++;
 	}
-	else if (ft_strnstr(p->map[p->idx], ident2str(ID_SO), 2))
-	{
-		if (identifier_texture(cub, p, ID_SO))
-			return (EXIT_FAILURE);
-	}
-	else if (ft_strnstr(p->map[p->idx], ident2str(ID_WE), 2))
-	{
-		if (identifier_texture(cub, p, ID_WE))
-			return (EXIT_FAILURE);
-	}
-	else if (ft_strnstr(p->map[p->idx], ident2str(ID_EA), 2))
-	{
-		if (identifier_texture(cub, p, ID_EA))
-			return (EXIT_FAILURE);
-	}
-	else if ((p->map[p->idx][0] == 'C') || (p->map[p->idx][0] == 'F'))
+	if ((p->map[p->idx][0] == 'C') || (p->map[p->idx][0] == 'F'))
 	{
 		if (identifier_color(cub, p, p->map[p->idx][0]))
 			return (EXIT_FAILURE);
