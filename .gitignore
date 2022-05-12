@@ -1,6 +1,9 @@
 /main.dSYM/*
 .DS_Store
 .DS_Store
+.vscode
+$HOME
+cub3d
 
 # OS generated files
 .DS_Store
