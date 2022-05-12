@@ -2,30 +2,14 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc build active file",
-            "command": "/usr/bin/gcc",
+            "label": "build",
+            "command": "make",
             "args": [
-                "-g",
-                "-I${fileDirname}/mlx",
-                "-L${fileDirname}/libmlx",
-                "-lmlx",
-                "-I${fileDirname}/ft",
-                "-L${fileDirname}/libft",
-                "-lft",
-                "-framework",
-                "OpenGL",
-                "-framework",
-                "AppKit",
-			    "${fileDirname}/*.c",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "/Users/mnies/Documents/42cub3D"
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "problemMatcher": [ ],
             "group": {
                 "kind": "build",
                 "isDefault": true
