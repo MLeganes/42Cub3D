@@ -13,13 +13,13 @@ char	*ident2str(t_identifier ident)
 	return (NULL);
 }
 
-static int identifier_texture(t_cub3d *cub, t_parser *p, t_identifier id)
+static int	identifier_texture(t_cub3d *cub, t_parser *p, t_identifier id)
 {
 	p->line = p->map[p->idx];
 	p->line = p->line + 2;
-	while(p->line && *(p->line) && ft_strchr(" \t\r", *(p->line)))
+	while (p->line && *(p->line) && ft_strchr(" \t\r", *(p->line)))
 		p->line++;
-	if(is_ext_xpm(p) == EXIT_SUCCESS)
+	if (is_ext_xpm(p) == EXIT_SUCCESS)
 	{
 		if (cub->img[id]->path_tex == NULL)
 		{
@@ -32,9 +32,9 @@ static int identifier_texture(t_cub3d *cub, t_parser *p, t_identifier id)
 			return (EXIT_SUCCESS);
 		}
 		else
-			return (err_fail2("Texture repited ", p->line)); //p->status = 3; //Texture repited, error!!!!!
+			return (err_fail2("Texture repited ", p->line));
 	}
-	return (EXIT_FAILURE);	//Error: wrong path or wrong extension in the theme\n
+	return (EXIT_FAILURE);
 }
 
 static int	identifier_selector(t_cub3d *cub, t_parser *p)
@@ -70,7 +70,6 @@ static int	identifier_selector(t_cub3d *cub, t_parser *p)
 int	parser_identifier(t_cub3d *cub, t_parser *p)
 {
 	p->idx = 0;
-
 	printf("\n **** PARSING ID texture and colors *****\n");
 	while (p->map[p->idx])
 	{

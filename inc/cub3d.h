@@ -127,6 +127,10 @@ int		is_ext_xpm(t_parser *p);
 int		is_space(char c);
 int		is_path(char *path);
 void	remove_eol(t_parser *p);
+int		is_map_all_sides(char **map, int j);
+int		is_player(t_parser *p);
+int		is_map_wall(char *line);
+int		is_map_chars(char *line);
 
 /*
  * ERROR
