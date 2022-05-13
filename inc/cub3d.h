@@ -75,10 +75,10 @@ typedef struct s_cor{
 }			t_cor;
 
 typedef struct s_cub3d{
-	char	*img_no;
-	char	*img_so;
-	char	*img_we;
-	char	*img_ea;
+	char	*img_no;//no used
+	char	*img_so;//no used
+	char	*img_we;//no used
+	char	*img_ea;//no used
 	t_img	*img[MAX];
 	t_color color[MAX_COLOR];	//Color for floor and celling.
 	int		color_floor; //no used
@@ -119,6 +119,7 @@ int		parser_identifier(t_cub3d *cub, t_parser *p);
 int		identifier_color(t_cub3d *cub, t_parser *p, char c);
 int		parser_map(t_cub3d *cub, t_parser *p);
 char	*ident2str(t_identifier ident);
+void	free_split(t_parser *p);
 
 /*
  * PARSER UTILS
@@ -133,15 +134,21 @@ int		is_player(t_parser *p);
 int		is_map_wall(char *line);
 int		is_map_chars(char *line);
 
-/*
- * ERROR
- */
-int		err_fail(char *msg);
-int		err_fail2(char *msg1, char *msg2);
 
 /*
  * FRAME
  */
 void	test_frame(t_cub3d *cub);
+
+/*
+ * FREE
+ */
+void	free_cub3d(t_cub3d *c);
+
+/*
+ * ERROR
+ */
+int		err_fail(char *msg);
+int		err_fail2(char *msg1, char *msg2);
 
 #endif

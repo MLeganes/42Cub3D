@@ -95,5 +95,6 @@ int	parser_map(t_cub3d *cub, t_parser *p)
 	fucking25lines_map = &p->map[p->idx];
 	if (!is_valid_map(p, cub, fucking25lines_map, i))
 		return (err_fail("No valid map in .cup file\n"));
+	printf(" **** PARSING MAP - OK- *****\n\n");
 	return (EXIT_SUCCESS);
 }

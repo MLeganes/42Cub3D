@@ -70,6 +70,7 @@ int	identifier_color(t_cub3d *cub, t_parser *p, char c)
 	printf("\nIDENTIFIER COLOR: %c ", c);
 	p->line = p->map[p->idx];
 	p->line++;
+	free_split(p);
 	while (p->line && *(p->line) && ft_strchr(" \t\r", *(p->line)))
 		p->line++;
 	if (c == 'C')
