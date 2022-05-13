@@ -3,11 +3,16 @@
 void free_cub3d(t_cub3d *cub)
 {
 
+	free(cub->img[ID_NO]->path_tex);
 	free(cub->img[ID_NO]);
+	free(cub->img[ID_SO]->path_tex);
 	free(cub->img[ID_SO]);
+	free(cub->img[ID_WE]->path_tex);
 	free(cub->img[ID_WE]);
+	free(cub->img[ID_EA]->path_tex);
 	free(cub->img[ID_EA]);
 
+	
 	// int i;
 
 	// i = 0;
