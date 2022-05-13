@@ -47,6 +47,7 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 		i++;
 	}
 	cub->map.map[i] = NULL;
+	cub->player = parse->player;
 	return (1);
 }
 

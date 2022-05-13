@@ -2,18 +2,41 @@
 
 int parser_free(t_parser *p)
 {
-	(void)p;
+	int i;
 
+	if (p->map != NULL)
+	{
+		free(p->map);
+		p->map = NULL;
+	}
+	if (p->line != NULL)
+	{
+		free(p->line);
+		p->line = NULL;
+	}
+	i = 0;
+	if (p->split != NULL)
+	{
+		while (p->split[i])
+		{
+			free(p->split[i]);
+			i++;
+		}
+	}
 	return (EXIT_SUCCESS);
 }
 
-int parser_fullcheck(t_cub3d *cub, t_parser *p)
+int parser_check(t_cub3d *cub)
 {
-	(void)p;
-	(void)cub;
-	//if (cub->color[ID_C].used == COLOR_IN_USE &&)
-
-	return (EXIT_SUCCESS);
+	if (cub->color[ID_C].used == COLOR_IN_USE
+		&& cub->color[ID_F].used == COLOR_IN_USE
+		&& cub->img[ID_SO]->path_tex != NULL
+		&& cub->img[ID_NO]->path_tex != NULL
+		&& cub->img[ID_WE]->path_tex != NULL
+		&& cub->img[ID_EA]->path_tex != NULL
+		&& cub->player != 0)
+			return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 void	parser_init(t_parser *pars)
@@ -47,8 +70,8 @@ int	parser(char *path, t_cub3d *cub)
 	 *    2). free_parser(&parser);//If needed, yes map!!
 	 * 
 	 */
-	if (parser_fullcheck(cub, &pars))
-		return (EXIT_FAILURE);
+	if (parser_check(cub))
+		return (err_fail("Missing some parameter in cub file"));
 	if (parser_free(&pars))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

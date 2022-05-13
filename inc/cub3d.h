@@ -83,6 +83,7 @@ typedef struct s_cub3d{
 	t_color color[MAX_COLOR];	//Color for floor and celling.
 	int		color_floor; //no used
 	int		color_celling; //no used
+	char	player;
 	t_map	map;
 
 }			t_cub3d;
