@@ -51,3 +51,4 @@ int	is_map_all_sides(char **map, int j)
 		return (0);
 	return (1);
 }
+

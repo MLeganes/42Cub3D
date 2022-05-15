@@ -24,6 +24,8 @@ void cub3d_init(t_cub3d *cub)
 	cub->color[ID_F].b = -1;
 	cub->color[ID_F].rgb = -1;
 	cub->color[ID_F].used = COLOR_NO_USED;
+
+	cub->player = 0;
 }
 
 int	main(int argcnt, char **args)
@@ -38,8 +40,10 @@ int	main(int argcnt, char **args)
 	if (parser(args[1], &cub))
 		exit (err_fail("Main-Parser fail\n"));
 
-	test_frame(&cub);
+//	test_frame(&cub);
+	free_cub3d(&cub);
 
-//	system("leaks cub3d");
+	system("leaks cub3d");
+
 	exit (EXIT_SUCCESS);
 }
