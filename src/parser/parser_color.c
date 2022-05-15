@@ -58,8 +58,7 @@ static int	get_rgb(t_cub3d *cub, t_parser *p, t_identcolor id)
 	{
 		cub->color[id].rgb = rgb_to_color_hex(cub->color[id].r,
 				cub->color[id].g, cub->color[id].b);
-		printf("Color rgb: %d in the %s \n", cub->color[id].rgb,
-			identcolor2str(id));
+		printf("Color rgb: %d in the %s \n", cub->color[id].rgb, identcolor2str(id));
 		cub->color[id].used = COLOR_IN_USE;
 		return (EXIT_SUCCESS);
 	}
@@ -71,7 +70,6 @@ int	identifier_color(t_cub3d *cub, t_parser *p, char c)
 	printf("\nIDENTIFIER COLOR: %c ", c);
 	p->line = p->map[p->idx];
 	p->line++;
-//	free_split(p);
 	while (p->line && *(p->line) && ft_strchr(" \t\r", *(p->line)))
 		p->line++;
 	if (c == 'C')

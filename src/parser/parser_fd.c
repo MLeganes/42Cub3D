@@ -51,9 +51,7 @@ int	parser_readfd(t_parser *p, char *path)
 	while (p->line)
 	{
 		if (p->line[0] == '\n')
-		{
 			free(p->line);
-		}
 		else
 		{
 			p->map[p->idx] = p->line;
