@@ -53,6 +53,7 @@ static int	get_rgb(t_cub3d *cub, t_parser *p, t_identcolor id)
 			return (EXIT_FAILURE);
 		i++;
 	}
+	free_split(p);
 	if (i == 3)
 	{
 		cub->color[id].rgb = rgb_to_color_hex(cub->color[id].r,
@@ -70,7 +71,7 @@ int	identifier_color(t_cub3d *cub, t_parser *p, char c)
 	printf("\nIDENTIFIER COLOR: %c ", c);
 	p->line = p->map[p->idx];
 	p->line++;
-	free_split(p);
+//	free_split(p);
 	while (p->line && *(p->line) && ft_strchr(" \t\r", *(p->line)))
 		p->line++;
 	if (c == 'C')

@@ -8,7 +8,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include "libft.h"
-# include "mlx.h"
+//# include "mlx.h"
 
 /* ************************************************************************** */
 /* STRUCT DEFS															  	  */
@@ -66,6 +66,7 @@ typedef struct s_map
 {
 	int		height;
 	int		width;
+	int		nolines;
 	char	**map;
 }			t_map;
 

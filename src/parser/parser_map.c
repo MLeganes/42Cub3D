@@ -40,14 +40,16 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 	i = 0;
 	cub->map.height = 0;
 	cub->map.width = 0;
-	cub->map.map = (char **)malloc(sizeof(char *) * (parse->nolines + 2));
+	cub->map.map = (char **)malloc(sizeof(char *) * (parse->imap + 2));
 	while (map[i])
 	{
 		cub->map.map[i] = ft_strdup(map[i]);
 		i++;
 	}
 	cub->map.map[i] = NULL;
+	cub->map.nolines = parse->imap + 2;
 	cub->player = parse->player;
+	
 	return (1);
 }
 

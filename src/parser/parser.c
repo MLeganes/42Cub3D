@@ -36,6 +36,7 @@ void	free_split(t_parser *p)
 			p->split[i] = NULL;
 			i++;
 		}
+		free( p->split);
 	}
 	p->split = NULL;
 }
@@ -45,11 +46,14 @@ int parser_free(t_parser *p)
 	int i;
 
 	i = 0;
-	while (p->map[i])
+	while (i < (p->nolines + 1))
 	{
-		free(p->map[i]);
+		if (p->map[i])
+			free(p->map[i]);
 		i++;
 	}
+	if (p->map)
+		free(p->map);
 	p->map = NULL;
 	free_split(p);
 	return (EXIT_SUCCESS);

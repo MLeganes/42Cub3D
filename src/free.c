@@ -2,23 +2,37 @@
 
 void free_cub3d(t_cub3d *cub)
 {
+	int i;
 
-	free(cub->img[ID_NO]);
-	free(cub->img[ID_SO]);
-	free(cub->img[ID_WE]);
-	free(cub->img[ID_EA]);
+	// free img
+	i = 0;
+	while (i < MAX)
+	{
+		if (cub->img[i])
+		{
+			if(cub->img[i]->path_tex)
+				free(cub->img[i]->path_tex);
+			free(cub->img[i]);
+		}
+		i++;
+	}
+	// free(cub->img[ID_NO]->path_tex);
+	// free(cub->img[ID_NO]);
+	// free(cub->img[ID_SO]->path_tex);
+	// free(cub->img[ID_SO]);
+	// free(cub->img[ID_WE]->path_tex);
+	// free(cub->img[ID_WE]);
+	// free(cub->img[ID_EA]->path_tex);
+	// free(cub->img[ID_EA]);
 
-	// int i;
+	i = 0;
+	while (i < cub->map.nolines)
+	{
+		if (cub->map.map[i])
+			free(cub->map.map[i]);
+		i++;
+	}
+	if (cub->map.map)
+		free(cub->map.map);
 
-	// i = 0;
-	// while (i < 4 && c->img[i])
-	// {
-	// 	free(c->img[i]->path_tex);
-	// 	c->img[i]->path_tex = NULL;
-	// 	//free(c->img[i]->ptr);
-	// 	//c->img[i]->ptr = NULL;
-	// 	free(c->img[i]);
-	// 	c->img[i] = NULL;
-	// 	i++;
-	// }
 }
