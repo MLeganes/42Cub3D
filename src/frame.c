@@ -2,43 +2,48 @@
 
 t_cor	get_next_contact_point(t_cor pos, t_cor vec);
 
-void	draw_line(int column, int height, double dist, t_cub3d *cub, void *mlx, void *win)
+void	draw_line(int column, float dist, t_cub3d *cub)
 {
 	int		row;
 	int		wall_height;
 
 	(void)cub;
 	row = 0;
-	wall_height = (height / 2) / dist;
-	while (row <= height)
+	wall_height = (W_HEIGHT / 2) / dist;
+	while (row <= W_HEIGHT)
 	{
-		if (row < height / 2 - wall_height)
-			mlx_pixel_put(mlx, win, column, row, cub->color_celling);
-		else if (row > height / 2 + wall_height)
-			mlx_pixel_put(mlx, win, column, row, cub->color_floor);
+		if (row < W_HEIGHT / 2 - wall_height)
+			mlx_pixel_put(cub->mlx, cub->win, column, row, cub->color_celling);
+		else if (row > W_HEIGHT / 2 + wall_height)
+			mlx_pixel_put(cub->mlx, cub->win, column, row, cub->color_floor);
+		else
+			mlx_pixel_put(cub->mlx, cub->win, column, row, 0);
 		row++;
 	}
 }
 
-void	draw_frame(int width, int height, int deg, t_cor pos, t_cub3d *cub, void *mlx, void *win)
+int	render_frame(void *cub_ptr)
 {
 	int		column;
-	double	multi;
+	float	multi;
+	t_cub3d	*cub;
 	t_cor	column_vector;
 	t_cor	cam_vec;
 	t_cor	pos_cntct;
 
-	cam_vec.x = cos(deg * 3.142857 / 180);
-	cam_vec.y = sin(deg * 3.142857 / 180);
+	cub = (t_cub3d *)cub_ptr;
+	cub->rotation = cub->rotation + 10;
+	cam_vec.x = cos(cub->rotation * 3.142857 / 180);
+	cam_vec.y = sin(cub->rotation * 3.142857 / 180);
 	column = 0;
-	while (column <= width)
+	while (column <= W_WIDTH)
 	{
-		pos_cntct.x = pos.x;
-		pos_cntct.y = pos.y;
-		if (column > width / 2)
-			multi = -((double)(width - 2 * column) / width);
+		pos_cntct.x = cub->pos.x;
+		pos_cntct.y = cub->pos.y;
+		if (column > W_WIDTH / 2)
+			multi = -((float)(W_WIDTH - 2 * column) / W_WIDTH);
 		else
-			multi = (double)(2 * column - width) / width;
+			multi = (float)(2 * column - W_WIDTH) / W_WIDTH;
 		column_vector.x = cam_vec.x + multi * cam_vec.y;
 		column_vector.y = cam_vec.y + multi * -cam_vec.x;
 		while (1)
@@ -47,42 +52,29 @@ void	draw_frame(int width, int height, int deg, t_cor pos, t_cub3d *cub, void *m
 			if ('1' == cub->map.map[(int)pos_cntct.y][(int)pos_cntct.x])
 				break ;
 		}
-		draw_line(column, height, hypot(pos_cntct.x - pos.x, pos_cntct.y - pos.y), cub, mlx, win);
+		draw_line(column, hypot(pos_cntct.x - cub->pos.x, pos_cntct.y - cub->pos.y), cub);
 		column++;
 	}
+	return (0);
 }
 
 void	test_frame(t_cub3d *cub)
 {
-	void	*win;
-	void	*mlx;
-	t_cor	pos;
-	int		width;
-	int		height;
-
-	pos.x = 15;
-	pos.y = 1.5;
-	height = 500;
-	width = 1000;
+	cub->pos.x = 15;
+	cub->pos.y = 1.5;
+	cub->rotation = 13;
 	cub->color_celling = 255;
 	cub->color_floor = 45345;
-	// while (1)
-	// {
-	// 	pos = get_next_contact_point(pos, vec);
-	// 	if ('1' == cub->map.map[(int)pos.y][(int)pos.x])
-	// 		break ;
-	// }
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, width, height, "test");
-	draw_frame(width, height, 360, pos, cub, mlx, win);
-	// mlx_pixel_put(mlx, win, 10, 10, 242);
-	mlx_loop(mlx);
+	cub->mlx = mlx_init();
+	cub->win = mlx_new_window(cub->mlx, W_WIDTH, W_HEIGHT, "Cub3D");
+	mlx_loop_hook(cub->mlx, render_frame, cub);
+	mlx_loop(cub->mlx);
 }
 
 t_cor	get_next_contact_point(t_cor pos, t_cor vec)
 {
-	double	mx;
-	double	my;
+	float	mx;
+	float	my;
 	int		stepx;
 	int		stepy;
 

@@ -18,6 +18,8 @@
 # define MAX			4
 
 # define MAX_COLOR		2
+# define W_HEIGHT		500
+# define W_WIDTH		1000
 # define COLOR_NO_USED	-1
 # define COLOR_IN_USE	0
 # define MAP_CHARS "01NSEW"
@@ -71,8 +73,8 @@ typedef struct s_map
 }			t_map;
 
 typedef struct s_cor{
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 }			t_cor;
 
 typedef struct s_cub3d{
@@ -86,6 +88,10 @@ typedef struct s_cub3d{
 	int		color_celling; //no used
 	char	player;
 	t_map	map;
+	t_cor	pos;
+	int		rotation;
+	void	*win;
+	void	*mlx;
 
 }			t_cub3d;
 

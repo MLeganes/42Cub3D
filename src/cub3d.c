@@ -40,7 +40,7 @@ int	main(int argcnt, char **args)
 	if (parser(args[1], &cub))
 		exit (err_fail("Main-Parser fail\n"));
 
-//	test_frame(&cub);
+	test_frame(&cub);
 	free_cub3d(&cub);
 
 	system("leaks cub3d");
