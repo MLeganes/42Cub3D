@@ -27,10 +27,10 @@ all:		$(NAME)
 
 # Linking...
 # To run in iMac wit libmlx.
-#$(NAME):	libft/libft.a libmlx/libmlx.a $(OBJS)
+$(NAME):	libft/libft.a libmlx/libmlx.a $(OBJS)
 
 # To run in Linux without libmlx.
-$(NAME):	libft/libft.a $(OBJS)
+#$(NAME):	libft/libft.a $(OBJS)
 			@echo "\033[1;32m$(NAME)\033[1;0m\033[32m linking...\033[0m"
 			@$(CC) $(OBJS) $(LIBRARIES) -o $(NAME)
 			@echo "\033[1;32m$(NAME)\033[1;0m\033[32m created.\033[0m"
