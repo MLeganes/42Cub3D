@@ -85,8 +85,8 @@ typedef struct s_cub3d{
 	char	*img_ea;//no used
 	t_img	*img[MAX];
 	t_color color[MAX_COLOR];	//Color for floor and celling.
-	int		color_floor; //no used
-	int		color_celling; //no used
+	int		color_floor;
+	int		color_celling;
 	char	player;
 	t_map	map;
 	t_cor	pos;
@@ -146,12 +146,18 @@ int		is_map_chars(char *line);
 /*
  * FRAME
  */
-void	test_frame(t_cub3d *cub);
+int		render_frame(void *cub_ptr);
 
 /*
  * FREE
  */
 void	free_cub3d(t_cub3d *c);
+
+/*
+ * GAME
+ */
+
+int game(t_cub3d *cub);
 
 /*
  * ERROR

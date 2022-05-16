@@ -58,19 +58,6 @@ int	render_frame(void *cub_ptr)
 	return (0);
 }
 
-void	test_frame(t_cub3d *cub)
-{
-	cub->pos.x = 15;
-	cub->pos.y = 1.5;
-	cub->rotation = 13;
-	cub->color_celling = 255;
-	cub->color_floor = 45345;
-	cub->mlx = mlx_init();
-	cub->win = mlx_new_window(cub->mlx, W_WIDTH, W_HEIGHT, "Cub3D");
-	mlx_loop_hook(cub->mlx, render_frame, cub);
-	mlx_loop(cub->mlx);
-}
-
 t_cor	get_next_contact_point(t_cor pos, t_cor vec)
 {
 	float	mx;
