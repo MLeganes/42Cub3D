@@ -19,16 +19,24 @@ static int	is_map_closed(char **map)
 
 static int	find_player(char *line, t_parser *p)
 {
-	while (*line)
+	int i;
+
+	i = 0;
+	while (line[i])
 	{
-		if (ft_strchr(MAP_PLAYER, *line))
+		if (ft_strchr(MAP_PLAYER, line[i]))
 		{
 			if (p->player == '\0')
-				p->player = *line;
+			{
+				// player pos is the revers here!!!
+				p->player_pos.y = p->imap + 0.5;
+				p->player_pos.x = i + 0.5;
+				p->player = line[i];
+			}
 			else
 				return (0);
 		}
-		line++;
+		i++;
 	}
 	return (1);
 }
@@ -48,9 +56,19 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 	}
 	cub->map.map[i] = NULL;
 	cub->map.nolines = parse->imap + 2;
-	cub->player = parse->player;
 	cub->color_celling = cub->color[ID_C].rgb;
 	cub->color_floor = cub->color[ID_F].rgb;
+
+	cub->pos.y = parse->player_pos.y + 0.5;
+	cub->pos.x = parse->player_pos.x + 0.5;
+	if (parse->player == 'N')
+		cub->rotation = 0;
+	else if (parse->player == 'W')
+		cub->rotation = 90;
+	else if (parse->player == 'S')
+		cub->rotation = 180;
+	else if (parse->player == 'E')
+		cub->rotation = 270;
 	
 	return (1);
 }

@@ -12,10 +12,6 @@ int game(t_cub3d *cub)
 	// init parameter for player, win size, mlx
 	game_init(cub);
 
-	cub->pos.x = 10;
-	cub->pos.y = 5;
-	cub->rotation = 0;
-
 
 	mlx_loop_hook(cub->mlx, render_frame, cub);
 

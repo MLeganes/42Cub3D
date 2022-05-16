@@ -8,7 +8,7 @@ int parser_check(t_cub3d *cub)
 		&& cub->img[ID_NO]->path_tex != NULL
 		&& cub->img[ID_WE]->path_tex != NULL
 		&& cub->img[ID_EA]->path_tex != NULL
-		&& cub->player != 0)
+		&& cub->rotation != -1)
 	{
 		printf("\n\n **** PARSING CHECKING *****\n\n");
 		printf("texture NO %s\n", cub->img[ID_NO]->path_tex);
@@ -17,7 +17,7 @@ int parser_check(t_cub3d *cub)
 		printf("texture EA %s\n", cub->img[ID_EA]->path_tex);
 		printf("color C %d\n", cub->color[ID_C].rgb);
 		printf("color F %d\n", cub->color[ID_F].rgb);
-		printf("player %c\n", cub->player);
+		printf("player rot %d\n", cub->rotation);
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);

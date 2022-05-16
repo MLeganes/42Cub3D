@@ -1,6 +1,33 @@
 #include "cub3d.h"
 
-t_cor	get_next_contact_point(t_cor pos, t_cor vec);
+t_cor	get_next_contact_point(t_cor pos, t_cor vec)
+{
+	float	mx;
+	float	my;
+	int		stepx;
+	int		stepy;
+
+	stepx = 1;
+	if (vec.x < 0)
+		stepx = -1;
+	stepy = 1;
+	if (vec.y < 0)
+		stepy = -1;
+	if (vec.y != 0 && vec.x != 0)
+	{
+		my = (stepy - (pos.y - (long)pos.y)) / vec.y;
+		mx = (stepx - (pos.x - (long)pos.x)) / vec.x;
+	}
+	if (vec.y != 0 && vec.x != 0 && my > mx)
+		pos.y = pos.y + vec.y * mx;
+	else if (vec.y != 0)
+		pos.y = (long)(pos.y + stepy);
+	if (vec.x != 0 && vec.y != 0 && my < mx)
+		pos.x = pos.x + vec.x * my;
+	else if (vec.x != 0)
+		pos.x = (long)(pos.x + stepx);
+	return (pos);
+}
 
 void	draw_line(int column, float dist, t_cub3d *cub)
 {
@@ -56,33 +83,4 @@ int	render_frame(void *cub_ptr)
 		column++;
 	}
 	return (0);
-}
-
-t_cor	get_next_contact_point(t_cor pos, t_cor vec)
-{
-	float	mx;
-	float	my;
-	int		stepx;
-	int		stepy;
-
-	stepx = 1;
-	if (vec.x < 0)
-		stepx = -1;
-	stepy = 1;
-	if (vec.y < 0)
-		stepy = -1;
-	if (vec.y != 0 && vec.x != 0)
-	{
-		my = (stepy - (pos.y - (long)pos.y)) / vec.y;
-		mx = (stepx - (pos.x - (long)pos.x)) / vec.x;
-	}
-	if (vec.y != 0 && vec.x != 0 && my > mx)
-		pos.y = pos.y + vec.y * mx;
-	else if (vec.y != 0)
-		pos.y = (long)(pos.y + stepy);
-	if (vec.x != 0 && vec.y != 0 && my < mx)
-		pos.x = pos.x + vec.x * my;
-	else if (vec.x != 0)
-		pos.x = (long)(pos.x + stepx);
-	return (pos);
 }

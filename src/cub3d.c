@@ -25,7 +25,9 @@ void cub3d_init(t_cub3d *cub)
 	cub->color[ID_F].rgb = -1;
 	cub->color[ID_F].used = COLOR_NO_USED;
 
-	cub->player = 0;
+	cub->rotation = -1;
+	cub->pos.x = -1;
+	cub->pos.y = -1;
 }
 
 int	main(int argcnt, char **args)

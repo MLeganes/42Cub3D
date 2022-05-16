@@ -87,7 +87,6 @@ typedef struct s_cub3d{
 	t_color color[MAX_COLOR];	//Color for floor and celling.
 	int		color_floor;
 	int		color_celling;
-	char	player;
 	t_map	map;
 	t_cor	pos;
 	int		rotation;
@@ -101,11 +100,12 @@ typedef struct s_parser_helper
 	int				fd;
 	char			*line;
 	char			**split;
-	int				idx;
-	int				nolines;
-	int				imap;
 	char			**map;
+	int				idx;
+	int				imap;
+	int				nolines;
 	char			player;
+	t_cor			player_pos;
 }					t_parser;
 
 
