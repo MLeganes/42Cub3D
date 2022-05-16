@@ -8,7 +8,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include "libft.h"
-//# include "mlx.h"
+# include "mlx.h"
 
 /* ************************************************************************** */
 /* STRUCT DEFS															  	  */
