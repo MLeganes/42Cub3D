@@ -24,7 +24,7 @@ void cub3d_init(t_cub3d *cub)
 	cub->color[ID_F].b = -1;
 	cub->color[ID_F].rgb = -1;
 	cub->color[ID_F].used = COLOR_NO_USED;
-	
+
 	cub->player = 0;
 }
 

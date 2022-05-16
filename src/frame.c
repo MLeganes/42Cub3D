@@ -2,33 +2,79 @@
 
 t_cor	get_next_contact_point(t_cor pos, t_cor vec);
 
-void	test_frame(t_cub3d *cub)
+void	draw_line(int column, float dist, t_cub3d *cub)
 {
-	void	*win;
-	void	*mlx;
-	t_cor	pos;
-	t_cor	vec;
-
+	int		row;
+	int		wall_height;
 
 	(void)cub;
+	row = 0;
+	wall_height = (W_HEIGHT / 2) / dist;
+	while (row <= W_HEIGHT)
+	{
+		if (row < W_HEIGHT / 2 - wall_height)
+			mlx_pixel_put(cub->mlx, cub->win, column, row, cub->color_celling);
+		else if (row > W_HEIGHT / 2 + wall_height)
+			mlx_pixel_put(cub->mlx, cub->win, column, row, cub->color_floor);
+		else
+			mlx_pixel_put(cub->mlx, cub->win, column, row, 0);
+		row++;
+	}
+}
 
+int	render_frame(void *cub_ptr)
+{
+	int		column;
+	float	multi;
+	t_cub3d	*cub;
+	t_cor	column_vector;
+	t_cor	cam_vec;
+	t_cor	pos_cntct;
 
-	pos.x = 0;
-	pos.y = 0;
-	vec.x = 10;
-	vec.y = -4;
-	while (pos.x < 100 && pos.y < 100 && pos.x > -100 && pos.y > -100)
-		pos = get_next_contact_point(pos, vec);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 1000, 500, "test");
-	mlx_pixel_put(mlx, win, 10, 10, 242);
-	mlx_loop(mlx);
+	cub = (t_cub3d *)cub_ptr;
+	cub->rotation = cub->rotation + 10;
+	cam_vec.x = cos(cub->rotation * 3.142857 / 180);
+	cam_vec.y = sin(cub->rotation * 3.142857 / 180);
+	column = 0;
+	while (column <= W_WIDTH)
+	{
+		pos_cntct.x = cub->pos.x;
+		pos_cntct.y = cub->pos.y;
+		if (column > W_WIDTH / 2)
+			multi = -((float)(W_WIDTH - 2 * column) / W_WIDTH);
+		else
+			multi = (float)(2 * column - W_WIDTH) / W_WIDTH;
+		column_vector.x = cam_vec.x + multi * cam_vec.y;
+		column_vector.y = cam_vec.y + multi * -cam_vec.x;
+		while (1)
+		{
+			pos_cntct = get_next_contact_point(pos_cntct, column_vector);
+			if ('1' == cub->map.map[(int)pos_cntct.y][(int)pos_cntct.x])
+				break ;
+		}
+		draw_line(column, hypot(pos_cntct.x - cub->pos.x, pos_cntct.y - cub->pos.y), cub);
+		column++;
+	}
+	return (0);
+}
+
+void	test_frame(t_cub3d *cub)
+{
+	cub->pos.x = 15;
+	cub->pos.y = 1.5;
+	cub->rotation = 13;
+	cub->color_celling = 255;
+	cub->color_floor = 45345;
+	cub->mlx = mlx_init();
+	cub->win = mlx_new_window(cub->mlx, W_WIDTH, W_HEIGHT, "Cub3D");
+	mlx_loop_hook(cub->mlx, render_frame, cub);
+	mlx_loop(cub->mlx);
 }
 
 t_cor	get_next_contact_point(t_cor pos, t_cor vec)
 {
-	double	mx;
-	double	my;
+	float	mx;
+	float	my;
 	int		stepx;
 	int		stepy;
 
