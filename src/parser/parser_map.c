@@ -49,6 +49,8 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 	cub->map.map[i] = NULL;
 	cub->map.nolines = parse->imap + 2;
 	cub->player = parse->player;
+	cub->color_celling = cub->color[ID_C].rgb;
+	cub->color_floor = cub->color[ID_F].rgb;
 	
 	return (1);
 }
