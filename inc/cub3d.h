@@ -12,11 +12,10 @@
 # include "mlx.h"
 
 /* ************************************************************************** */
-/* STRUCT DEFS															  	  */
+/* DEFINE CONSTANS														  	  */
 /* ************************************************************************** */
 
 # define MAX			4
-
 # define MAX_COLOR		2
 # define W_HEIGHT		500
 # define W_WIDTH		1000
@@ -26,6 +25,23 @@
 # define MAP_INSIDE "0NSEW"
 # define MAP_PLAYER "NSEW"
 
+
+/*
+ * KEY CODES
+ */
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_W 13
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_ESC 53
+
+/* ************************************************************************** */
+/* STRUCT DEFS															  	  */
+/* ************************************************************************** */
 typedef enum e_identifier
 {
 	ID_NO,

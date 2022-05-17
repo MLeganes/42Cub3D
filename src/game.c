@@ -15,13 +15,10 @@ int game(t_cub3d *cub)
 
 	mlx_loop_hook(cub->mlx, render_frame, cub);
 
-
+	game_keys(cub);
 
 /* 
-	mlx_hook(cub->win, 2, 1L << 0, &key_pressed, cub);
-	mlx_hook(cub->win, 3, 1L << 1, &key_released, cub);
-	mlx_hook(cub->win, 17, 1L << 17, &exit_cross, cub);
-	mlx_hook(cub->win, 6, 1L << 0, mouse, cub);
+	
 */
 	mlx_loop(cub->mlx);
 
