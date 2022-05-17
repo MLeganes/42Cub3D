@@ -34,17 +34,16 @@ void	draw_line(int column, float dist, t_cub3d *cub)
 	int		row;
 	int		wall_height;
 
-	(void)cub;
 	row = 0;
 	wall_height = (W_HEIGHT / 2) / dist;
-	while (row <= W_HEIGHT)
+	while (row < W_HEIGHT)
 	{
 		if (row < W_HEIGHT / 2 - wall_height)
-			mlx_pixel_put(cub->mlx, cub->win, column, row, cub->color_celling);
+			cub->img3d->addr[(int)(row * (int)cub->win_w + column)] = cub->color_celling;
 		else if (row > W_HEIGHT / 2 + wall_height)
-			mlx_pixel_put(cub->mlx, cub->win, column, row, cub->color_floor);
+			cub->img3d->addr[(int)(row * (int)cub->win_w + column)] = cub->color_floor;
 		else
-			mlx_pixel_put(cub->mlx, cub->win, column, row, 0);
+			cub->img3d->addr[(int)(row * (int)cub->win_w + column)] = 0;
 		row++;
 	}
 }
@@ -59,11 +58,12 @@ int	render_frame(void *cub_ptr)
 	t_cor	pos_cntct;
 
 	cub = (t_cub3d *)cub_ptr;
-	cub->rotation = cub->rotation + 10;
 	cam_vec.x = cos(cub->rotation * 3.142857 / 180);
 	cam_vec.y = sin(cub->rotation * 3.142857 / 180);
 	column = 0;
-	while (column <= W_WIDTH)
+	cub->img3d->ptr = mlx_new_image(cub->mlx, W_WIDTH, W_HEIGHT);
+	cub->img3d->addr = (int *)mlx_get_data_addr(cub->img3d->ptr, &cub->img3d->bits_p_pixel, &cub->img3d->size_line, &cub->img3d->endian);
+	while (column < W_WIDTH)
 	{
 		pos_cntct.x = cub->pos.x;
 		pos_cntct.y = cub->pos.y;
@@ -82,5 +82,6 @@ int	render_frame(void *cub_ptr)
 		draw_line(column, hypot(pos_cntct.x - cub->pos.x, pos_cntct.y - cub->pos.y), cub);
 		column++;
 	}
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->img3d->ptr, 0, 0);	
 	return (0);
 }

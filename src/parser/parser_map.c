@@ -49,9 +49,11 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 	cub->map.height = 0;
 	cub->map.width = 0;
 	cub->map.map = (char **)malloc(sizeof(char *) * (parse->imap + 2));
+		printf("Start copying the map in cub.map.map.....\n");
 	while (map[i])
 	{
 		cub->map.map[i] = ft_strdup(map[i]);
+		printf("%i %s\n", i, cub->map.map[i]);
 		i++;
 	}
 	cub->map.map[i] = NULL;
@@ -59,8 +61,8 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 	cub->color_celling = cub->color[ID_C].rgb;
 	cub->color_floor = cub->color[ID_F].rgb;
 
-	cub->pos.y = parse->player_pos.y + 0.5;
-	cub->pos.x = parse->player_pos.x + 0.5;
+	cub->pos.y = parse->player_pos.y;
+	cub->pos.x = parse->player_pos.x;
 	if (parse->player == 'N')
 		cub->rotation = 0;
 	else if (parse->player == 'W')

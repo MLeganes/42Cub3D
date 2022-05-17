@@ -1,5 +1,19 @@
 #include "cub3d.h"
 
+void player_move(t_cub3d *cub, int move)
+{
+	int newx;
+	int newy;
+	printf("key pressed %d\n", move);
+	newx = cub->pos.x + 0.1 * cos((cub->rotation + move) * 3.142857 / 180);
+	newy = cub->pos.y + 0.1 * sin((cub->rotation + move) * 3.142857 / 180);
+
+	// check if we can move to the next coor.
+	cub->pos.x = newx;
+	cub->pos.y = newy;
+
+}
+
 int key_pressed(int key, t_cub3d *cub)
 {
 	(void)key;
@@ -10,17 +24,18 @@ int key_pressed(int key, t_cub3d *cub)
 	// double	next_playery;
 	// double	move_angle;
 
-	// if (key == KEY_A)
-	// 	//move_angle = normalrad
-	// else if (key == KEY_S)
-	// 	//S
-	// else if (key == KEY_D)
-	// 	//
-	// else if (key == KEY_W)
-	// 	//
-	// else if (key == KEY_RIGHT)
-	// 	//
-	// else if (key == KEY_LEFT)
+	if (key == KEY_A)
+		player_move(cub, 90);
+	else if (key == KEY_S)
+		player_move(cub, 180);
+	else if (key == KEY_D)
+		player_move(cub, 270);
+	else if (key == KEY_W)
+		player_move(cub, 0);
+	if (key == KEY_RIGHT)
+		cub->rotation = cub->rotation - 6;
+	else if (key == KEY_LEFT)
+		cub->rotation = cub->rotation + 6;
 	// 	//
 	// else if (key == KEY_ESC)
 		//

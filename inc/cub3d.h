@@ -17,12 +17,15 @@
 
 # define MAX			4
 # define MAX_COLOR		2
+
 // # define W_HEIGHT		500
 // # define W_WIDTH		1000
-# define W_HEIGHT		480
-# define W_WIDTH		640
+# define W_HEIGHT		480 //changed to t_cub3d structure
+# define W_WIDTH		640 //changed to t_cub3d structure
+
 # define COLOR_NO_USED	-1
 # define COLOR_IN_USE	0
+
 # define MAP_CHARS "01NSEW"
 # define MAP_INSIDE "0NSEW"
 # define MAP_PLAYER "NSEW"
@@ -91,10 +94,14 @@ typedef struct s_color
 
 typedef struct s_map
 {
-	int		height;
-	int		width;
+	int		height; // no used
+	int		width; // maybe no used
+	int		h;
+	int		w;
+	int		rows;
+	int		cols;
 	int		tile_size;
-	int		nolines;
+	int		nolines; // it should be same as rows
 	char	**map;
 }			t_map;
 
@@ -140,16 +147,23 @@ typedef struct s_cub3d{
 	char	*img_we;//no used
 	char	*img_ea;//no used
 
+	//mlx
 	void	*mlx;
 	void	*win;
+	int		win_w;
+	int		win_h;
 
-	t_img	*img3d;
+	// texture, colors and mlx init parameter
 	t_img	*img[MAX];
 	t_color color[MAX_COLOR];	//Color for floor and celling.
 	int		color_floor;
 	int		color_celling;
+	t_img	*img3d;
 
+	// map 
 	t_map	map;
+	
+	// player
 	t_cor	pos;
 	int		rotation;
 
@@ -216,9 +230,16 @@ void	free_cub3d(t_cub3d *c);
 /*
  * GAME
  */
+int		game(t_cub3d *cub);
+int		game_key_hooks(t_cub3d *cub);
 
-int game(t_cub3d *cub);
-int game_key_hooks(t_cub3d *cub);
+/*
+ * GAME UTILS
+ */
+int		map_count_lines(char **strs);
+int		map_max_strlen(char **strs);
+double	calculate_tilesize(t_cub3d *cub);
+
 
 /*
  * ERROR
