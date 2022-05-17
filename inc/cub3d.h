@@ -17,8 +17,10 @@
 
 # define MAX			4
 # define MAX_COLOR		2
-# define W_HEIGHT		500
-# define W_WIDTH		1000
+// # define W_HEIGHT		500
+// # define W_WIDTH		1000
+# define W_HEIGHT		480
+# define W_WIDTH		640
 # define COLOR_NO_USED	-1
 # define COLOR_IN_USE	0
 # define MAP_CHARS "01NSEW"
@@ -62,6 +64,12 @@ typedef struct s_img
 {
 	char	*path_tex;
 	void	*ptr; //mlx pointer
+	int		*addr;
+	int		bits_p_pixel;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
 }			t_img;
 
 /********
@@ -85,6 +93,7 @@ typedef struct s_map
 {
 	int		height;
 	int		width;
+	int		tile_size;
 	int		nolines;
 	char	**map;
 }			t_map;
@@ -94,20 +103,55 @@ typedef struct s_cor{
 	float	y;
 }			t_cor;
 
+
+typedef struct	s_ray
+{
+	double		fov;
+	double		fovref_min;
+	double		fovref_max;
+	double		wall_strip_w;
+	int			num_rays;
+	double		distprojplane;
+	double		ray_angle;
+	int			facing_down;
+	int			facing_left;
+	double		horxstep;
+	double		horystep;
+	double		verxstep;
+	double		verystep;
+	double		wall_hit_horx;
+	double		wall_hit_hory;
+	double		wall_hit_verx;
+	double		wall_hit_very;
+	double		wall_hit_x;
+	double		wall_hit_y;
+	int			found_hor_wall;
+	int			found_ver_wall;
+	double		distance;
+	int			hit_vertical;
+//	t_text		text_wallhit;
+//	t_line		line;
+}				t_ray;
+
+
 typedef struct s_cub3d{
 	char	*img_no;//no used
 	char	*img_so;//no used
 	char	*img_we;//no used
 	char	*img_ea;//no used
+
+	void	*mlx;
+	void	*win;
+
+	t_img	*img3d;
 	t_img	*img[MAX];
 	t_color color[MAX_COLOR];	//Color for floor and celling.
 	int		color_floor;
 	int		color_celling;
+
 	t_map	map;
 	t_cor	pos;
 	int		rotation;
-	void	*win;
-	void	*mlx;
 
 }			t_cub3d;
 
@@ -174,6 +218,7 @@ void	free_cub3d(t_cub3d *c);
  */
 
 int game(t_cub3d *cub);
+int game_key_hooks(t_cub3d *cub);
 
 /*
  * ERROR

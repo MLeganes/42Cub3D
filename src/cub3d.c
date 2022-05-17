@@ -28,6 +28,9 @@ void cub3d_init(t_cub3d *cub)
 	cub->rotation = -1;
 	cub->pos.x = -1;
 	cub->pos.y = -1;
+
+	cub->map.tile_size = 20;
+	cub->img3d = malloc(sizeof(t_img));
 }
 
 int	main(int argcnt, char **args)
