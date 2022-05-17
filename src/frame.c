@@ -29,11 +29,21 @@ t_cor	get_next_contact_point(t_cor pos, t_cor vec)
 	return (pos);
 }
 
-void	draw_line(int column, float dist, t_cub3d *cub)
+
+void draw_pixel_wall(int column, int row, float height, t_draw *draw)
+{
+	column = column - ((W_HEIGHT - height) / 2);
+	draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)] = 0;
+}
+
+void	draw_line(int column, t_cor *poscntct, float dist, t_cub3d *cub)
 {
 	int		row;
 	int		wall_height;
+	t_draw	draw;
 
+	draw.cub = cub;
+	draw.poscntct = poscntct;
 	row = 0;
 	wall_height = (W_HEIGHT / 2) / dist;
 	while (row < W_HEIGHT)
@@ -43,7 +53,7 @@ void	draw_line(int column, float dist, t_cub3d *cub)
 		else if (row > W_HEIGHT / 2 + wall_height)
 			cub->img3d->addr[(int)(row * (int)cub->win_w + column)] = cub->color_floor;
 		else
-			cub->img3d->addr[(int)(row * (int)cub->win_w + column)] = 0;
+			draw_pixel_wall(column, row, wall_height, &draw);
 		row++;
 	}
 }
@@ -79,7 +89,7 @@ int	render_frame(void *cub_ptr)
 			if ('1' == cub->map.map[(int)pos_cntct.y][(int)pos_cntct.x])
 				break ;
 		}
-		draw_line(column, hypot(pos_cntct.x - cub->pos.x, pos_cntct.y - cub->pos.y), cub);
+		draw_line(column, &pos_cntct, hypot(pos_cntct.x - cub->pos.x, pos_cntct.y - cub->pos.y), cub);
 		column++;
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img3d->ptr, 0, 0);	

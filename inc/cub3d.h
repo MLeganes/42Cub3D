@@ -169,6 +169,11 @@ typedef struct s_cub3d{
 
 }			t_cub3d;
 
+typedef struct s_draw{
+	t_cub3d *cub;
+	t_cor	*poscntct;
+}			t_draw;
+
 typedef struct s_parser_helper
 {
 	int				fd;
