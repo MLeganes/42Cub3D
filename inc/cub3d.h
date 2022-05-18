@@ -226,6 +226,7 @@ int		is_map_chars(char *line);
  * FRAME
  */
 int		render_frame(void *cub_ptr);
+void	get_next_contact_point(t_cor *pos, t_cor *vec);
 
 /*
  * FREE

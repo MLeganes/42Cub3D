@@ -10,36 +10,36 @@ float	step(float *pos, float *vec)
 		return ((int)(*pos));
 }
 
-t_cor	get_next_contact_point(t_cor pos, t_cor *vec)
+void	get_next_contact_point(t_cor *pos, t_cor *vec)
 {
 	float	mx;
 	float	my;
 
-	if (vec->x < 0 && pos.x - (int)pos.x == 0)
+	if (vec->x < 0 && pos->x - (int)pos->x == 0)
 		mx = 1 / -vec->x;
 	else if (vec->x > 0)
-		mx = (1 - (pos.x - (int)pos.x)) / vec->x;
+		mx = (1 - (pos->x - (int)pos->x)) / vec->x;
 	else if (vec->x < 0)
-		mx = (pos.x - (int)pos.x) / -vec->x;
+		mx = (pos->x - (int)pos->x) / -vec->x;
 	else
 		mx = INT32_MAX;
-	if (vec->y < 0 && pos.y - (int)pos.y == 0)
+	if (vec->y < 0 && pos->y - (int)pos->y == 0)
 		my = 1 / -vec->y;
 	else if (vec->y > 0)
-		my = (1 - (pos.y - (int)pos.y)) / vec->y;
+		my = (1 - (pos->y - (int)pos->y)) / vec->y;
 	else if (vec->y < 0)
-		my = (pos.y - (int)pos.y) / -vec->y;
+		my = (pos->y - (int)pos->y) / -vec->y;
 	else
 		my = INT32_MAX;
 	if (vec->x == 0 || my < mx)
-		pos.x = pos.x + vec->x * my;
+		pos->x = pos->x + vec->x * my;
 	else
-		pos.x = step(&(pos.x), &(vec->x));
+		pos->x = step(&(pos->x), &(vec->x));
 	if (vec->y == 0 || my > mx)
-		pos.y = pos.y + vec->y * mx;
+		pos->y = pos->y + vec->y * mx;
 	else
-		pos.y = step(&(pos.y), &(vec->y));
-	return (pos);
+		pos->y = step(&(pos->y), &(vec->y));
+	//return (pos);
 }
 
 
@@ -123,7 +123,7 @@ int	render_frame(void *cub_ptr)
 		column_vector.y = cam_vec.y + multi * -cam_vec.x;
 
 		while (!is_wall(cub, &pos_cntct, &column_vector))
-			pos_cntct = get_next_contact_point(pos_cntct, &column_vector);
+			get_next_contact_point(&pos_cntct, &column_vector);
 		draw_line(column, &pos_cntct, cub);
 		column++;
 	}

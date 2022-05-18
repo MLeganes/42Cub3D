@@ -77,7 +77,7 @@ int game(t_cub3d *cub)
 {
 	// init parameter for player, win size, mlx
 	game_init(cub);
-	// mlx_do_key_autorepeatoff(cub->mlx);
+	//mlx_do_key_autorepeatoff(cub->mlx);
 	// mlx_loop_hook(cub->mlx, game_render, cub);
 	mlx_loop_hook(cub->mlx, render_frame, cub);
 	game_key_hooks(cub);
