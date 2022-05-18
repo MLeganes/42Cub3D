@@ -160,9 +160,9 @@ typedef struct s_cub3d{
 	int		color_celling;
 	t_img	*img3d;
 
-	// map 
+	// map
 	t_map	map;
-	
+
 	// player
 	t_cor	pos;
 	int		rotation;
@@ -227,6 +227,7 @@ int		is_map_chars(char *line);
  */
 int		render_frame(void *cub_ptr);
 void	get_next_contact_point(t_cor *pos, t_cor *vec);
+int		is_wall(t_cub3d *cub, t_cor *pos_cntct, t_cor *vec);
 
 /*
  * FREE

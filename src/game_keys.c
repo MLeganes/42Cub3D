@@ -10,18 +10,20 @@ void player_move(t_cub3d *cub, int move)
 	printf("key pressed %d\n", move);
 	move_vec.x = 0.1 * cos((cub->rotation + move) * 3.142857 / 180);
 	move_vec.y = 0.1 * sin((cub->rotation + move) * 3.142857 / 180);
-
-	get_next_contact_point(&pos_cntct, &move_vec);
-	
-	//1.check point inside the block
-	//if (cub->map.map[(int)pos_cntct.y][(int)pos_cntct.x] == '1')
-		//walll - no move
-	
-	//2.
-	//
-	cub->pos.x = cub->pos.x + move_vec.x;
-	cub->pos.y = cub->pos.y + move_vec.y;
-
+	while (!is_wall(cub, &pos_cntct, &move_vec))
+		get_next_contact_point(&pos_cntct, &move_vec);
+	if (cub->pos.x != pos_cntct.x
+		&& ((move_vec.x > 0 && cub->pos.x + move_vec.x < pos_cntct.x)
+			|| (move_vec.x < 0 && cub->pos.x + move_vec.x > pos_cntct.x)))
+		cub->pos.x = cub->pos.x + move_vec.x;
+	else if (cub->pos.x != pos_cntct.x)
+		cub->pos.x = pos_cntct.x;
+	if (cub->pos.y != pos_cntct.y
+		&& ((move_vec.y > 0 && cub->pos.y + move_vec.y < pos_cntct.y)
+			|| (move_vec.y < 0 && cub->pos.y + move_vec.y > pos_cntct.y)))
+		cub->pos.y = cub->pos.y + move_vec.y;
+	else if (cub->pos.y != pos_cntct.y)
+		cub->pos.y = pos_cntct.y;
 }
 
 int key_pressed(int key, t_cub3d *cub)

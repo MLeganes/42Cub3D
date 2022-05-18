@@ -39,23 +39,35 @@ void	get_next_contact_point(t_cor *pos, t_cor *vec)
 		pos->y = pos->y + vec->y * mx;
 	else
 		pos->y = step(&(pos->y), &(vec->y));
-	//return (pos);
 }
 
 
-void	draw_pixel_wall(int column, int row, float height, t_draw *draw)
+void	draw_pixel_wall(int column, int row, int height, t_draw *draw)
 {
 	int	h;
+	int	id;
+	int	pos;
 
-	h = row - ((W_HEIGHT - height) / 2);
 	if (draw->poscntct->x - (int)draw->poscntct->x == 0
-		&& draw->poscntct->y - (int)draw->poscntct->y < 0.01)
-		draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)] = 0;
-	else if (draw->poscntct->y - (int)draw->poscntct->y == 0
-		&& draw->poscntct->x - (int)draw->poscntct->x < 0.01)
-		draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)] = 123124;
+		&& draw->poscntct->x > draw->cub->pos.x)
+		id = ID_NO;
+	else if (draw->poscntct->x - (int)draw->poscntct->x == 0)
+		id = ID_SO;
+	else if (draw->poscntct->y > draw->cub->pos.y)
+		id = ID_WE;
 	else
-		draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)] = 244;
+		id = ID_EA;
+	h = row - ((W_HEIGHT - height) / 2);
+	if (draw->poscntct->x - (int)draw->poscntct->x == 0)
+		pos = (draw->poscntct->y - (int)draw->poscntct->y)
+			* draw->cub->img[id]->width - 1;
+	else
+		pos = (draw->poscntct->x - (int)draw->poscntct->x)
+			* draw->cub->img[id]->width - 1;
+	pos = (float)h / height * (draw->cub->img[id]->height - 1)
+		+ pos * (draw->cub->img[id]->height - 1);
+	draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)]
+		= draw->cub->img[id]->addr[pos];
 }
 
 void	draw_line(int column, t_cor *poscntct, t_cub3d *cub)
@@ -72,9 +84,9 @@ void	draw_line(int column, t_cor *poscntct, t_cub3d *cub)
 	wall_height = (W_HEIGHT / 2) / dist;
 	while (row < W_HEIGHT)
 	{
-		if (row < W_HEIGHT / 2 - wall_height)
+		if (row < (W_HEIGHT - wall_height) / 2)
 			cub->img3d->addr[(int)(row * (int)cub->win_w + column)] = cub->color_celling;
-		else if (row > W_HEIGHT / 2 + wall_height)
+		else if (row > W_HEIGHT - (W_HEIGHT - wall_height) / 2)
 			cub->img3d->addr[(int)(row * (int)cub->win_w + column)] = cub->color_floor;
 		else
 			draw_pixel_wall(column, row, wall_height, &draw);
@@ -82,13 +94,12 @@ void	draw_line(int column, t_cor *poscntct, t_cub3d *cub)
 	}
 }
 
-int	is_wall(t_cub3d *cub, t_cor *pos_cntct, t_cor *column_vector)
+int	is_wall(t_cub3d *cub, t_cor *pos_cntct, t_cor *vec)
 {
-	(void)column_vector;
-	if (cub->pos.y > pos_cntct->y && (int)pos_cntct->y - pos_cntct->y == 0
+	if (/*cub->pos.y > pos_cntct->y*/ vec->y < 0 && (int)pos_cntct->y - pos_cntct->y == 0
 		&& '1' == cub->map.map[(int)pos_cntct->y - 1][(int)pos_cntct->x])
 		return (1);
-	else if (cub->pos.x > pos_cntct->x && (int)pos_cntct->x - pos_cntct->x == 0
+	else if (/*cub->pos.x > pos_cntct->x*/ vec->x < 0 && (int)pos_cntct->x - pos_cntct->x == 0
 		&& '1' == cub->map.map[(int)pos_cntct->y][(int)pos_cntct->x - 1])
 		return (1);
 	else if ('1' == cub->map.map[(int)pos_cntct->y][(int)pos_cntct->x])
@@ -121,7 +132,6 @@ int	render_frame(void *cub_ptr)
 			multi = (float)(2 * column - W_WIDTH) / W_WIDTH;
 		column_vector.x = cam_vec.x + multi * cam_vec.y;
 		column_vector.y = cam_vec.y + multi * -cam_vec.x;
-
 		while (!is_wall(cub, &pos_cntct, &column_vector))
 			get_next_contact_point(&pos_cntct, &column_vector);
 		draw_line(column, &pos_cntct, cub);
