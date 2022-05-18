@@ -1,47 +1,71 @@
 #include "cub3d.h"
 
-t_cor	get_next_contact_point(t_cor pos, t_cor vec)
+float	step(float *pos, float *vec)
+{
+	if (*vec < 0 && (int)(*pos) - (*pos) == 0)
+		return ((int)(*pos) - 1);
+	if (*vec > 0)
+		return ((int)(*pos) + 1);
+	else
+		return ((int)(*pos));
+}
+
+t_cor	get_next_contact_point(t_cor pos, t_cor *vec)
 {
 	float	mx;
 	float	my;
-	int		stepx;
-	int		stepy;
 
-	stepx = 1;
-	if (vec.x < 0)
-		stepx = -1;
-	stepy = 1;
-	if (vec.y < 0)
-		stepy = -1;
-	if (vec.y != 0 && vec.x != 0)
-	{
-		my = (stepy - (pos.y - (long)pos.y)) / vec.y;
-		mx = (stepx - (pos.x - (long)pos.x)) / vec.x;
-	}
-	if (vec.y != 0 && vec.x != 0 && my > mx)
-		pos.y = pos.y + vec.y * mx;
-	else if (vec.y != 0)
-		pos.y = (long)(pos.y + stepy);
-	if (vec.x != 0 && vec.y != 0 && my < mx)
-		pos.x = pos.x + vec.x * my;
-	else if (vec.x != 0)
-		pos.x = (long)(pos.x + stepx);
+	if (vec->x < 0 && pos.x - (int)pos.x == 0)
+		mx = 1 / -vec->x;
+	else if (vec->x > 0)
+		mx = (1 - (pos.x - (int)pos.x)) / vec->x;
+	else if (vec->x < 0)
+		mx = (pos.x - (int)pos.x) / -vec->x;
+	else
+		mx = INT32_MAX;
+	if (vec->y < 0 && pos.y - (int)pos.y == 0)
+		my = 1 / -vec->y;
+	else if (vec->y > 0)
+		my = (1 - (pos.y - (int)pos.y)) / vec->y;
+	else if (vec->y < 0)
+		my = (pos.y - (int)pos.y) / -vec->y;
+	else
+		my = INT32_MAX;
+	if (vec->x == 0 || my < mx)
+		pos.x = pos.x + vec->x * my;
+	else
+		pos.x = step(&(pos.x), &(vec->x));
+	if (vec->y == 0 || my > mx)
+		pos.y = pos.y + vec->y * mx;
+	else
+		pos.y = step(&(pos.y), &(vec->y));
 	return (pos);
 }
 
 
-void draw_pixel_wall(int column, int row, float height, t_draw *draw)
+void	draw_pixel_wall(int column, int row, float height, t_draw *draw)
 {
-	column = column - ((W_HEIGHT - height) / 2);
-	draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)] = 0;
+	int	h;
+
+	h = row - ((W_HEIGHT - height) / 2);
+	if (draw->poscntct->x - (int)draw->poscntct->x == 0
+		&& draw->poscntct->y - (int)draw->poscntct->y < 0.01)
+		draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)] = 0;
+	else if (draw->poscntct->y - (int)draw->poscntct->y == 0
+		&& draw->poscntct->x - (int)draw->poscntct->x < 0.01)
+		draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)] = 123124;
+	else
+		draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)] = 244;
 }
 
-void	draw_line(int column, t_cor *poscntct, float dist, t_cub3d *cub)
+void	draw_line(int column, t_cor *poscntct, t_cub3d *cub)
 {
 	int		row;
 	int		wall_height;
 	t_draw	draw;
+	float	dist;
 
+	dist = hypot(poscntct->x - cub->pos.x, poscntct->y - cub->pos.y);
 	draw.cub = cub;
 	draw.poscntct = poscntct;
 	row = 0;
@@ -56,6 +80,20 @@ void	draw_line(int column, t_cor *poscntct, float dist, t_cub3d *cub)
 			draw_pixel_wall(column, row, wall_height, &draw);
 		row++;
 	}
+}
+
+int	is_wall(t_cub3d *cub, t_cor *pos_cntct, t_cor *column_vector)
+{
+	(void)column_vector;
+	if (cub->pos.y > pos_cntct->y && (int)pos_cntct->y - pos_cntct->y == 0
+		&& '1' == cub->map.map[(int)pos_cntct->y - 1][(int)pos_cntct->x])
+		return (1);
+	else if (cub->pos.x > pos_cntct->x && (int)pos_cntct->x - pos_cntct->x == 0
+		&& '1' == cub->map.map[(int)pos_cntct->y][(int)pos_cntct->x - 1])
+		return (1);
+	else if ('1' == cub->map.map[(int)pos_cntct->y][(int)pos_cntct->x])
+		return (1);
+	return (0);
 }
 
 int	render_frame(void *cub_ptr)
@@ -83,15 +121,12 @@ int	render_frame(void *cub_ptr)
 			multi = (float)(2 * column - W_WIDTH) / W_WIDTH;
 		column_vector.x = cam_vec.x + multi * cam_vec.y;
 		column_vector.y = cam_vec.y + multi * -cam_vec.x;
-		while (1)
-		{
-			pos_cntct = get_next_contact_point(pos_cntct, column_vector);
-			if ('1' == cub->map.map[(int)pos_cntct.y][(int)pos_cntct.x])
-				break ;
-		}
-		draw_line(column, &pos_cntct, hypot(pos_cntct.x - cub->pos.x, pos_cntct.y - cub->pos.y), cub);
+
+		while (!is_wall(cub, &pos_cntct, &column_vector))
+			pos_cntct = get_next_contact_point(pos_cntct, &column_vector);
+		draw_line(column, &pos_cntct, cub);
 		column++;
 	}
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->img3d->ptr, 0, 0);	
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->img3d->ptr, 0, 0);
 	return (0);
 }

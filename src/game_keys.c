@@ -2,8 +2,9 @@
 
 void player_move(t_cub3d *cub, int move)
 {
-	int newx;
-	int newy;
+	float	newx;
+	float	newy;
+	
 	printf("key pressed %d\n", move);
 	newx = cub->pos.x + 0.1 * cos((cub->rotation + move) * 3.142857 / 180);
 	newy = cub->pos.y + 0.1 * sin((cub->rotation + move) * 3.142857 / 180);

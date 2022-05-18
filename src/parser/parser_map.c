@@ -64,14 +64,14 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 	cub->pos.y = parse->player_pos.y;
 	cub->pos.x = parse->player_pos.x;
 	if (parse->player == 'N')
-		cub->rotation = 0;
-	else if (parse->player == 'W')
-		cub->rotation = 90;
-	else if (parse->player == 'S')
-		cub->rotation = 180;
-	else if (parse->player == 'E')
 		cub->rotation = 270;
-	
+	else if (parse->player == 'W')
+		cub->rotation = 0;
+	else if (parse->player == 'S')
+		cub->rotation = 90;
+	else if (parse->player == 'E')
+		cub->rotation = 180;
+
 	return (1);
 }
 
