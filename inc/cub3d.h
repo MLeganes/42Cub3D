@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:09:24 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 16:10:19 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 16:36:34 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ int		is_wall(t_cub3d *cub, t_cor *pos_cntct, t_cor *vec);
  * FREE
  */
 int		free_game(t_cub3d *cub);
-int		exit_game(int key, t_cub3d *cub);
+int		exit_game(t_cub3d *cub);
 
 /*
  * GAME

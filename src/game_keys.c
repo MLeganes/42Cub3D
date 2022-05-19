@@ -42,13 +42,13 @@ int key_pressed(int key, t_cub3d *cub)
 	else if (key == KEY_LEFT)
 		cub->rotation = cub->rotation + 6;
 	else if (key == KEY_ESC)
-		exit_game(key, cub);
+		exit_game(cub);
 	return (EXIT_SUCCESS);
 }
 
 int game_key_hooks(t_cub3d *cub)
 {
 	mlx_hook(cub->win, 2, 1L << 2, &key_pressed, cub);
-	mlx_hook(cub->win, 17, 1L << 17, &exit_game, &cub);
+	mlx_hook(cub->win, 17, 1L << 17, &exit_game, cub);
 	return (EXIT_SUCCESS);
 }

@@ -49,9 +49,8 @@ int free_game(t_cub3d *cub)
 	exit (EXIT_SUCCESS);
 }
 
-int exit_game(int key, t_cub3d *cub)
+int exit_game(t_cub3d *cub)
 {
-	(void)key;
 	free_game(cub);
 	return (EXIT_FAILURE);
 }
