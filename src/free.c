@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:48:25 by amorcill          #+#    #+#             */
-/*   Updated: 2022/05/19 16:49:04 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:44:41 by mnies            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,5 @@ int	free_game(t_cub3d *cub)
 int	exit_game(t_cub3d *cub)
 {
 	free_game(cub);
-	return (EXIT_FAILURE);
-}
-
-int exit_game_2(void *cub)
-{
-	free_game((t_cub3d *)cub);
 	return (EXIT_FAILURE);
 }

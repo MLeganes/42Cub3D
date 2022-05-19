@@ -6,7 +6,7 @@
 /*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:44:03 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 17:56:50 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 18:39:01 by mnies            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	frame_render_loop(t_cor *cam_vec, t_cub3d *cub)
 		column_vector.y = cam_vec->y + multi * -cam_vec->x;
 		while (!contact_is_wall(cub, &pos_cntct, &column_vector))
 			contact_get_next(&pos_cntct, &column_vector);
-		frame_draw_line((W_WIDTH - column), &pos_cntct, cub);
+		frame_draw_line((W_WIDTH - (column + 1)), &pos_cntct, cub);
 		column++;
 	}
 }
