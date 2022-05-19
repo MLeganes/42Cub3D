@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:44:03 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 20:15:50 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 20:54:41 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	render_frame(void *cub_ptr)
 	t_cor	cam_vec;
 
 	cub = (t_cub3d *)cub_ptr;
+	if (cub->img3d->ptr)
+		mlx_destroy_image(cub->mlx, cub->img3d->ptr);
 	cam_vec.x = cos(cub->rotation * 3.142857 / 180);
 	cam_vec.y = sin(cub->rotation * 3.142857 / 180);
 	cub->img3d->ptr = mlx_new_image(cub->mlx, W_WIDTH, W_HEIGHT);
@@ -106,6 +108,5 @@ int	render_frame(void *cub_ptr)
 			&cub->img3d->endian);
 	frame_render_loop(&cam_vec, cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img3d->ptr, 0, 0);
-	mlx_destroy_image(cub->mlx, cub->img3d->ptr);
 	return (0);
 }

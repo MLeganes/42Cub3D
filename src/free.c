@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:48:25 by amorcill          #+#    #+#             */
-/*   Updated: 2022/05/19 20:17:52 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 21:02:15 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ static void	free_cub3d_img(t_cub3d *cub)
 	int	i;
 
 	i = 0;
+
 	while (i < MAX)
 	{
 		if (cub->img[i])
 		{
 			if (cub->img[i]->path_tex)
 				free(cub->img[i]->path_tex);
-			if (cub->img[i]->ptr)
-				mlx_destroy_image(cub->mlx, cub->img[i]->ptr);
 			free(cub->img[i]);
 		}
 		i++;
@@ -45,26 +44,47 @@ static void	free_cub3d_map(t_cub3d *cub)
 	}
 	if (cub->map.map)
 		free(cub->map.map);
-	if (cub->win && cub->mlx)
-		mlx_destroy_window(cub->mlx, cub->win);
+	
 	return ;
 }
 
 int	free_game_exit(t_cub3d *cub, int exit_status)
 {
+
 	free_cub3d_img(cub);
 	free_cub3d_map(cub);
 	exit (exit_status);
 }
 
-void	free_game(t_cub3d *cub)
-{
-	free_cub3d_img(cub);
-	free_cub3d_map(cub);
-}
+// void	free_game(t_cub3d *cub)
+// {
+// 	free_cub3d_img(cub);
+// 	free_cub3d_map(cub);
+// 	exit(EXIT_SUCCESS);
+// }
 
 int	exit_game(t_cub3d *cub)
 {
-	free_game(cub);
+	int	i;
+
+	i = 0;
+	while (i < MAX)
+	{
+		if (cub->img[i])
+		{
+			if (cub->img[i]->ptr)
+				mlx_destroy_image(cub->mlx, cub->img[i]->ptr);
+		}
+		i++;
+	}
+	if (cub->img3d->ptr)
+		mlx_destroy_image(cub->mlx, cub->img3d->ptr);
+	cub->img3d->ptr = NULL;
+	
+	if (cub->win && cub->mlx)
+		mlx_destroy_window(cub->mlx, cub->win);
+	cub->win = NULL;
+	//free_game(cub);
+	free_game_exit(cub, EXIT_SUCCESS);
 	return (0);
 }

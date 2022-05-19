@@ -6,7 +6,7 @@
 /*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:43:04 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 19:04:58 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/19 20:54:26 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	cub3d_init_afterparser(t_cub3d *cub)
 	cub->map.h = cub->map.rows * cub->map.tile_size;
 	cub->map.w = cub->map.cols * cub->map.tile_size;
 	cub->img3d = malloc(sizeof(t_img));
+	cub->img3d->ptr = NULL;
 	cub->win_h = W_HEIGHT;
 	cub->win_w = W_WIDTH;
 }
