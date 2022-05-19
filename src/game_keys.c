@@ -1,29 +1,23 @@
 #include "cub3d.h"
 
-void player_move(t_cub3d *cub, int move)
+void	player_move(t_cub3d *cub, int move)
 {
-	t_cor move_vec;
-	t_cor pos_cntct;
+	t_cor	move_vec;
+	t_cor	pos_cntct;
 
 	pos_cntct.x = cub->pos.x;
 	pos_cntct.y = cub->pos.y;
 	printf("key pressed %d\n", move);
 	move_vec.x = 0.1 * cos((cub->rotation + move) * 3.142857 / 180);
 	move_vec.y = 0.1 * sin((cub->rotation + move) * 3.142857 / 180);
-	while (!is_wall(cub, &pos_cntct, &move_vec))
-		get_next_contact_point(&pos_cntct, &move_vec);
-	if (cub->pos.x != pos_cntct.x
-		&& ((move_vec.x > 0 && cub->pos.x + move_vec.x < pos_cntct.x)
-			|| (move_vec.x < 0 && cub->pos.x + move_vec.x > pos_cntct.x)))
+	while (!contact_is_wall(cub, &pos_cntct, &move_vec))
+		contact_get_next(&pos_cntct, &move_vec);
+	if ((cub->pos.x < pos_cntct.x && cub->pos.x + move_vec.x < pos_cntct.x)
+		|| (cub->pos.x > pos_cntct.x && cub->pos.x + move_vec.x > pos_cntct.x))
 		cub->pos.x = cub->pos.x + move_vec.x;
-	else if (cub->pos.x != pos_cntct.x)
-		cub->pos.x = pos_cntct.x;
-	if (cub->pos.y != pos_cntct.y
-		&& ((move_vec.y > 0 && cub->pos.y + move_vec.y < pos_cntct.y)
-			|| (move_vec.y < 0 && cub->pos.y + move_vec.y > pos_cntct.y)))
+	if ((cub->pos.y < pos_cntct.y && cub->pos.y + move_vec.y < pos_cntct.y)
+		|| (cub->pos.y > pos_cntct.y && cub->pos.y + move_vec.y > pos_cntct.y))
 		cub->pos.y = cub->pos.y + move_vec.y;
-	else if (cub->pos.y != pos_cntct.y)
-		cub->pos.y = pos_cntct.y;
 }
 
 int key_pressed(int key, t_cub3d *cub)
@@ -66,7 +60,6 @@ int key_esc(int key, t_cub3d *cub)
 
 int game_key_hooks(t_cub3d *cub)
 {
-	mlx_do_key_autorepeatoff(cub->mlx);
 	mlx_hook(cub->win, 2, 1L << 2, &key_pressed, cub);
 	// mlx_hook(cub->win, 3, 1L << 1, &key_released, cub);
 	mlx_hook(cub->win, 17, 1L << 17, &key_esc, cub);

@@ -8,6 +8,7 @@ P			=	parser/
 
 OBJS		=	$(patsubst $S%.c, $O%.o, $(SRCS))
 SRCS		=	$Scub3d.c \
+				$Scontact.c \
 				$Sframe.c \
 				$S$Pparser.c $S$Pparser_fd.c $S$Pparser_identifier.c $S$Pparser_color.c $S$Pparser_map.c $S$Pparser_utils1.c  $S$Pparser_utils2.c \
 				$Sfree.c \

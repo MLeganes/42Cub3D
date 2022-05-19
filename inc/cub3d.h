@@ -197,6 +197,12 @@ typedef struct s_parser_helper
  */
 
 /*
+ * CONTACT
+ */
+void	contact_get_next(t_cor *pos, t_cor *vec);
+int		contact_is_wall(t_cub3d *cub, t_cor *pos_cntct, t_cor *vec);
+
+/*
  * PARSER
  */
 int		parser(char *path, t_cub3d *cub);
