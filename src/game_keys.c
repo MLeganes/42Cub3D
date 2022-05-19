@@ -20,16 +20,15 @@ void	player_move(t_cub3d *cub, int move)
 		cub->pos.y = cub->pos.y + move_vec.y;
 }
 
+// static int key_esc(int key, t_cub3d *cub)
+// {
+// 	(void)key;
+// 	free_game(cub);
+// 	return (EXIT_FAILURE);
+// }
+
 int key_pressed(int key, t_cub3d *cub)
 {
-	(void)key;
-	(void)cub;
-
-	// double	movestep;
-	// double	next_playerx;
-	// double	next_playery;
-	// double	move_angle;
-
 	if (key == KEY_A)
 		player_move(cub, 90);
 	else if (key == KEY_S)
@@ -39,30 +38,17 @@ int key_pressed(int key, t_cub3d *cub)
 	else if (key == KEY_W)
 		player_move(cub, 0);
 	if (key == KEY_RIGHT)
-		cub->rotation = cub->rotation - 6; //check if its 360 to 0
+		cub->rotation = cub->rotation - 6;
 	else if (key == KEY_LEFT)
 		cub->rotation = cub->rotation + 6;
-	// 	//
-	// else if (key == KEY_ESC)
-		//
+	else if (key == KEY_ESC)
+		exit_game(key, cub);
 	return (EXIT_SUCCESS);
 }
-
-int key_esc(int key, t_cub3d *cub)
-{
-	(void)key;
-	(void)cub;
-	//free everything
-	exit(EXIT_SUCCESS);
-}
-
-
 
 int game_key_hooks(t_cub3d *cub)
 {
 	mlx_hook(cub->win, 2, 1L << 2, &key_pressed, cub);
-	// mlx_hook(cub->win, 3, 1L << 1, &key_released, cub);
-	mlx_hook(cub->win, 17, 1L << 17, &key_esc, cub);
-	// mlx_hook(cub->win, 6, 1L << 0, mouse_hook, cub);
+	mlx_hook(cub->win, 17, 1L << 17, &exit_game, &cub);
 	return (EXIT_SUCCESS);
 }

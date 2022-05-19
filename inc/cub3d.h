@@ -227,7 +227,8 @@ int		is_wall(t_cub3d *cub, t_cor *pos_cntct, t_cor *vec);
 /*
  * FREE
  */
-void	free_cub3d(t_cub3d *c);
+int		free_game(t_cub3d *cub);
+int		exit_game(int key, t_cub3d *cub);
 
 /*
  * GAME
