@@ -6,7 +6,7 @@
 /*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:43:04 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 16:24:51 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:49:43 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,5 @@ int	main(int argcnt, char **args)
 		exit (err_fail("Main-Parser fail\n"));
 	cub3d_init_afterparser(&cub);
 	game(&cub);
-
-	//free_game(&cub);
-
-	system("leaks cub3d");
 	return (EXIT_SUCCESS);
 }

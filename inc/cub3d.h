@@ -6,7 +6,7 @@
 /*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:09:24 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 16:36:34 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:41:24 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,33 +115,6 @@ typedef struct s_cor{
 	float	x;
 	float	y;
 }			t_cor;
-
-typedef struct s_ray
-{
-	double		fov;
-	double		fovref_min;
-	double		fovref_max;
-	double		wall_strip_w;
-	int			num_rays;
-	double		distprojplane;
-	double		ray_angle;
-	int			facing_down;
-	int			facing_left;
-	double		horxstep;
-	double		horystep;
-	double		verxstep;
-	double		verystep;
-	double		wall_hit_horx;
-	double		wall_hit_hory;
-	double		wall_hit_verx;
-	double		wall_hit_very;
-	double		wall_hit_x;
-	double		wall_hit_y;
-	int			found_hor_wall;
-	int			found_ver_wall;
-	double		distance;
-	int			hit_vertical;
-}				t_ray;
 
 typedef struct s_cub3d
 {

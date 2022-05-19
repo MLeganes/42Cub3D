@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_keys.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/19 16:40:39 by amorcill          #+#    #+#             */
+/*   Updated: 2022/05/19 16:41:00 by amorcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	player_move(t_cub3d *cub, int move)
@@ -20,14 +32,7 @@ void	player_move(t_cub3d *cub, int move)
 		cub->pos.y = cub->pos.y + move_vec.y;
 }
 
-// static int key_esc(int key, t_cub3d *cub)
-// {
-// 	(void)key;
-// 	free_game(cub);
-// 	return (EXIT_FAILURE);
-// }
-
-int key_pressed(int key, t_cub3d *cub)
+int	key_pressed(int key, t_cub3d *cub)
 {
 	if (key == KEY_A)
 		player_move(cub, 90);
@@ -46,7 +51,7 @@ int key_pressed(int key, t_cub3d *cub)
 	return (EXIT_SUCCESS);
 }
 
-int game_key_hooks(t_cub3d *cub)
+int	game_key_hooks(t_cub3d *cub)
 {
 	mlx_hook(cub->win, 2, 1L << 2, &key_pressed, cub);
 	mlx_hook(cub->win, 17, 1L << 17, &exit_game, cub);
