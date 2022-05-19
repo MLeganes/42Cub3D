@@ -6,7 +6,7 @@
 /*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:44:03 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 15:51:30 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 17:56:50 by mnies            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ void	frame_draw_pixel_wall(int column, int row, int height, t_draw *draw)
 
 	if (draw->poscntct->x - (int)draw->poscntct->x == 0
 		&& draw->poscntct->x > draw->cub->pos.x)
-		id = ID_NO;
-	else if (draw->poscntct->x - (int)draw->poscntct->x == 0)
-		id = ID_SO;
-	else if (draw->poscntct->y > draw->cub->pos.y)
-		id = ID_WE;
-	else
 		id = ID_EA;
+	else if (draw->poscntct->x - (int)draw->poscntct->x == 0)
+		id = ID_WE;
+	else if (draw->poscntct->y > draw->cub->pos.y)
+		id = ID_SO;
+	else
+		id = ID_NO;
 	h = row - ((W_HEIGHT - height) / 2);
 	if (draw->poscntct->x - (int)draw->poscntct->x == 0)
 		pos = (draw->poscntct->y - (int)draw->poscntct->y)
-			* draw->cub->img[id]->width - 1;
+			* (draw->cub->img[id]->width - 1);
 	else
 		pos = (draw->poscntct->x - (int)draw->poscntct->x)
-			* draw->cub->img[id]->width - 1;
-	pos = (float)h / height * (draw->cub->img[id]->height - 1)
-		+ pos * (draw->cub->img[id]->height - 1);
+			* (draw->cub->img[id]->width - 1);
+	pos = (int)((float)h / height * (draw->cub->img[id]->height - 1))
+		*draw->cub->img[id]->width + pos;
 	draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)]
 		= draw->cub->img[id]->addr[pos];
 }
@@ -86,7 +86,7 @@ void	frame_render_loop(t_cor *cam_vec, t_cub3d *cub)
 		column_vector.y = cam_vec->y + multi * -cam_vec->x;
 		while (!contact_is_wall(cub, &pos_cntct, &column_vector))
 			contact_get_next(&pos_cntct, &column_vector);
-		frame_draw_line(column, &pos_cntct, cub);
+		frame_draw_line((W_WIDTH - column), &pos_cntct, cub);
 		column++;
 	}
 }

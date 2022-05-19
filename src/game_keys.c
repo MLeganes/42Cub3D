@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_keys.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:40:39 by amorcill          #+#    #+#             */
-/*   Updated: 2022/05/19 16:41:00 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:58:03 by mnies            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ void	player_move(t_cub3d *cub, int move)
 int	key_pressed(int key, t_cub3d *cub)
 {
 	if (key == KEY_A)
-		player_move(cub, 90);
+		player_move(cub, 270);
 	else if (key == KEY_S)
 		player_move(cub, 180);
 	else if (key == KEY_D)
-		player_move(cub, 270);
+		player_move(cub, 90);
 	else if (key == KEY_W)
 		player_move(cub, 0);
 	if (key == KEY_RIGHT)
-		cub->rotation = cub->rotation - 6;
-	else if (key == KEY_LEFT)
 		cub->rotation = cub->rotation + 6;
+	else if (key == KEY_LEFT)
+		cub->rotation = cub->rotation - 6;
 	else if (key == KEY_ESC)
 		exit_game(cub);
 	return (EXIT_SUCCESS);
