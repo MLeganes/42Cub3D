@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_keys.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:40:39 by amorcill          #+#    #+#             */
-/*   Updated: 2022/05/19 18:25:13 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 19:02:36 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	player_move(t_cub3d *cub, int move)
 
 	pos_cntct.x = cub->pos.x;
 	pos_cntct.y = cub->pos.y;
-	printf("key pressed %d\n", move);
 	move_vec.x = 0.1 * cos((cub->rotation + move) * 3.142857 / 180);
 	move_vec.y = 0.1 * sin((cub->rotation + move) * 3.142857 / 180);
 	while (!contact_is_wall(cub, &pos_cntct, &move_vec))

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:09:24 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 17:15:35 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 19:03:25 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
+# ifndef CUB3D_H
 # define CUB3D_H
 
 /***************************************************************************/
@@ -175,7 +175,6 @@ int		parser_identifier(t_cub3d *cub, t_parser *p);
 int		identifier_color(t_cub3d *cub, t_parser *p, char c);
 int		parser_map(t_cub3d *cub, t_parser *p);
 char	*ident2str(t_identifier ident);
-void	free_split(t_parser *p);
 
 /*
  * PARSER UTILS
@@ -191,17 +190,18 @@ int		is_map_wall(char *line);
 int		is_map_chars(char *line);
 
 /*
+ * PARSER FREE
+ */
+int		parser_free(t_parser *p);
+int		parser_free_return(t_parser *par, int ret_status);
+void	free_split(t_parser *p);
+
+/*
  * FRAME
  */
 int		render_frame(void *cub_ptr);
 void	get_next_contact_point(t_cor *pos, t_cor *vec);
 int		is_wall(t_cub3d *cub, t_cor *pos_cntct, t_cor *vec);
-
-/*
- * FREE
- */
-int		free_game(t_cub3d *cub);
-int		exit_game(t_cub3d *cub);
 
 /*
  * GAME
@@ -217,8 +217,11 @@ int		map_max_strlen(char **strs);
 double	calculate_tilesize(t_cub3d *cub);
 
 /*
- * ERROR
+ * FREE AND ERROR
  */
+void	free_game(t_cub3d *cub);
+int		free_game_exit(t_cub3d *cub, int exit_status);
+int		exit_game(t_cub3d *cub);
 int		err_fail(char *msg);
 int		err_fail2(char *msg1, char *msg2);
 

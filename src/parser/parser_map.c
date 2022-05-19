@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:41:25 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 15:59:47 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 17:16:27 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,9 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map, int i)
 {
 	i = 0;
 	cub->map.map = (char **)malloc(sizeof(char *) * (parse->imap + 2));
-	printf("Start copying the map in cub.map.map.....\n");
 	while (map[i])
 	{
 		cub->map.map[i] = ft_strdup(map[i]);
-		printf("%i %s\n", i, cub->map.map[i]);
 		i++;
 	}
 	cub->map.map[i] = NULL;
@@ -113,7 +111,6 @@ int	parser_map(t_cub3d *cub, t_parser *p)
 	int		i;
 	char	**fucking25lines_map;
 
-	printf("\n\n **** PARSING MAP *****\n\n");
 	remove_eol(p);
 	p->idx = 0;
 	while (p->map[p->idx] && !is_map_chars(p->map[p->idx]))
@@ -124,6 +121,5 @@ int	parser_map(t_cub3d *cub, t_parser *p)
 	fucking25lines_map = &p->map[p->idx];
 	if (!is_valid_map(p, cub, fucking25lines_map, i))
 		return (err_fail("No valid map in .cup file\n"));
-	printf(" **** PARSING MAP - OK- *****\n\n");
 	return (EXIT_SUCCESS);
 }

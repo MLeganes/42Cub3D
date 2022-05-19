@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_color.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:40:57 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 15:52:30 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 17:17:13 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static int	get_rgb(t_cub3d *cub, t_parser *p, t_identcolor id)
 	{
 		cub->color[id].rgb = rgb_to_color_hex(cub->color[id].r,
 				cub->color[id].g, cub->color[id].b);
-		printf("Color rgb: %d in the %s \n", cub->color[id].rgb, idcol2str(id));
 		cub->color[id].used = COLOR_IN_USE;
 		return (EXIT_SUCCESS);
 	}
@@ -79,14 +78,12 @@ static int	get_rgb(t_cub3d *cub, t_parser *p, t_identcolor id)
 
 int	identifier_color(t_cub3d *cub, t_parser *p, char c)
 {
-	printf("\nIDENTIFIER COLOR: %c ", c);
 	p->line = p->map[p->idx];
 	p->line++;
 	while (p->line && *(p->line) && ft_strchr(" \t\r", *(p->line)))
 		p->line++;
 	if (c == 'C')
 	{
-		printf("color C found: %s\n", p->line);
 		if (cub->color[ID_C].used == COLOR_NO_USED)
 			return (get_rgb(cub, p, ID_C));
 		else
@@ -94,7 +91,6 @@ int	identifier_color(t_cub3d *cub, t_parser *p, char c)
 	}
 	if (c == 'F')
 	{
-		printf("color F found: %s\n", p->line);
 		if (cub->color[ID_F].used == COLOR_NO_USED)
 			return (get_rgb(cub, p, ID_F));
 		else

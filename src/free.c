@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:48:25 by amorcill          #+#    #+#             */
-/*   Updated: 2022/05/19 18:44:41 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 19:05:04 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ static void	free_cub3d_img(t_cub3d *cub)
 		if (cub->img[i])
 		{
 			if (cub->img[i]->path_tex)
-			{
-				mlx_destroy_image(cub->mlx, cub->img[i]->ptr);
 				free(cub->img[i]->path_tex);
-			}
+			if (cub->img[i]->ptr)
+				mlx_destroy_image(cub->mlx, cub->img[i]->ptr);
 			free(cub->img[i]);
 		}
 		i++;
@@ -46,19 +45,26 @@ static void	free_cub3d_map(t_cub3d *cub)
 	}
 	if (cub->map.map)
 		free(cub->map.map);
-	mlx_destroy_window(cub->mlx, cub->win);
+	if (cub->win && cub->mlx)
+		mlx_destroy_window(cub->mlx, cub->win);
 	return ;
 }
 
-int	free_game(t_cub3d *cub)
+int	free_game_exit(t_cub3d *cub, int exit_status)
 {
 	free_cub3d_img(cub);
 	free_cub3d_map(cub);
-	exit (EXIT_SUCCESS);
+	exit (exit_status);
+}
+
+void	free_game(t_cub3d *cub)
+{
+	free_cub3d_img(cub);
+	free_cub3d_map(cub);
 }
 
 int	exit_game(t_cub3d *cub)
 {
 	free_game(cub);
-	return (EXIT_FAILURE);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_identifier.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:41:15 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 15:41:16 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 17:15:50 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	identifier_texture(t_cub3d *cub, t_parser *p, t_identifier id)
 			if (is_path(cub->img[id]->path_tex))
 				return (EXIT_FAILURE);
 			p->line = NULL;
-			printf("Paht for the img WORKING %s \n", cub->img[id]->path_tex);
 			return (EXIT_SUCCESS);
 		}
 		else
@@ -74,7 +73,6 @@ static int	identifier_selector(t_cub3d *cub, t_parser *p)
 int	parser_identifier(t_cub3d *cub, t_parser *p)
 {
 	p->idx = 0;
-	printf("\n **** PARSING ID texture and colors *****\n");
 	while (p->map[p->idx])
 	{
 		if (identifier_selector(cub, p))

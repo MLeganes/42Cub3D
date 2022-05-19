@@ -6,13 +6,13 @@
 /*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:43:04 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 16:49:43 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/19 19:04:58 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	cub3d_init(t_cub3d *cub)
+static void	cub3d_init_img(t_cub3d *cub)
 {
 	cub->img[ID_NO] = malloc(sizeof(t_img));
 	cub->img[ID_SO] = malloc(sizeof(t_img));
@@ -22,6 +22,17 @@ void	cub3d_init(t_cub3d *cub)
 	cub->img[ID_SO]->path_tex = NULL;
 	cub->img[ID_WE]->path_tex = NULL;
 	cub->img[ID_EA]->path_tex = NULL;
+	cub->img[ID_NO]->ptr = NULL;
+	cub->img[ID_SO]->ptr = NULL;
+	cub->img[ID_WE]->ptr = NULL;
+	cub->img[ID_EA]->ptr = NULL;
+}
+
+static void	cub3d_init(t_cub3d *cub)
+{
+	cub3d_init_img(cub);
+	cub->mlx = NULL;
+	cub->win = NULL;
 	cub->color[ID_C].r = -1;
 	cub->color[ID_C].g = -1;
 	cub->color[ID_C].b = -1;
@@ -57,7 +68,7 @@ int	main(int argcnt, char **args)
 		exit (err_fail("Incorrect arguments!\n"));
 	cub3d_init(&cub);
 	if (parser(args[1], &cub))
-		exit (err_fail("Main-Parser fail\n"));
+		return (free_game_exit(&cub, EXIT_FAILURE));
 	cub3d_init_afterparser(&cub);
 	game(&cub);
 	return (EXIT_SUCCESS);
