@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/19 15:41:48 by mnies             #+#    #+#             */
+/*   Updated: 2022/05/19 15:42:12 by mnies            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int parser_check(t_cub3d *cub)
+int	parser_check(t_cub3d *cub)
 {
 	if (cub->color[ID_C].used == COLOR_IN_USE
 		&& cub->color[ID_F].used == COLOR_IN_USE
@@ -25,7 +37,7 @@ int parser_check(t_cub3d *cub)
 
 void	free_split(t_parser *p)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (p->split != NULL)
@@ -36,14 +48,14 @@ void	free_split(t_parser *p)
 			p->split[i] = NULL;
 			i++;
 		}
-		free( p->split);
+		free(p->split);
 	}
 	p->split = NULL;
 }
 
-int parser_free(t_parser *p)
+int	parser_free(t_parser *p)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < (p->nolines + 1))

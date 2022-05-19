@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   frame.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/19 15:44:03 by mnies             #+#    #+#             */
+/*   Updated: 2022/05/19 15:51:30 by mnies            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	frame_draw_pixel_wall(int column, int row, int height, t_draw *draw)
@@ -79,7 +91,7 @@ void	frame_render_loop(t_cor *cam_vec, t_cub3d *cub)
 	}
 }
 
-int		render_frame(void *cub_ptr)
+int	render_frame(void *cub_ptr)
 {
 	t_cub3d	*cub;
 	t_cor	cam_vec;
@@ -87,7 +99,6 @@ int		render_frame(void *cub_ptr)
 	cub = (t_cub3d *)cub_ptr;
 	cam_vec.x = cos(cub->rotation * 3.142857 / 180);
 	cam_vec.y = sin(cub->rotation * 3.142857 / 180);
-
 	cub->img3d->ptr = mlx_new_image(cub->mlx, W_WIDTH, W_HEIGHT);
 	cub->img3d->addr = (int *)mlx_get_data_addr(cub->img3d->ptr,
 			&cub->img3d->bits_p_pixel, &cub->img3d->size_line,
@@ -96,5 +107,3 @@ int		render_frame(void *cub_ptr)
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img3d->ptr, 0, 0);
 	return (0);
 }
-
-

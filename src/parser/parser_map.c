@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/19 15:41:25 by mnies             #+#    #+#             */
+/*   Updated: 2022/05/19 15:59:47 by mnies            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	is_map_closed(char **map)
@@ -19,7 +31,7 @@ static int	is_map_closed(char **map)
 
 static int	find_player(char *line, t_parser *p)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -28,7 +40,6 @@ static int	find_player(char *line, t_parser *p)
 		{
 			if (p->player == '\0')
 			{
-				// player pos is the revers here!!!
 				p->player_pos.y = p->imap + 0.5;
 				p->player_pos.x = i + 0.5;
 				p->player = line[i];
@@ -41,15 +52,11 @@ static int	find_player(char *line, t_parser *p)
 	return (1);
 }
 
-int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
+int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map, int i)
 {
-	int	i;
-
 	i = 0;
-	cub->map.height = 0;
-	cub->map.width = 0;
 	cub->map.map = (char **)malloc(sizeof(char *) * (parse->imap + 2));
-		printf("Start copying the map in cub.map.map.....\n");
+	printf("Start copying the map in cub.map.map.....\n");
 	while (map[i])
 	{
 		cub->map.map[i] = ft_strdup(map[i]);
@@ -60,7 +67,6 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 	cub->map.nolines = parse->imap + 2;
 	cub->color_celling = cub->color[ID_C].rgb;
 	cub->color_floor = cub->color[ID_F].rgb;
-
 	cub->pos.y = parse->player_pos.y;
 	cub->pos.x = parse->player_pos.x;
 	if (parse->player == 'N')
@@ -71,7 +77,6 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map)
 		cub->rotation = 90;
 	else if (parse->player == 'E')
 		cub->rotation = 180;
-
 	return (1);
 }
 
@@ -98,7 +103,7 @@ static int	is_valid_map(t_parser *p, t_cub3d *cub, char **map, int i)
 	}
 	if (!is_map_wall(map[i - 1]) && is_map_closed(&map[i - 2]))
 		return (0);
-	if (!copy_map_to_cub(cub, p, map))
+	if (!copy_map_to_cub(cub, p, map, 0))
 		return (0);
 	return (1);
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_color.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/19 15:40:57 by mnies             #+#    #+#             */
+/*   Updated: 2022/05/19 15:52:30 by mnies            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-static char	*identcolor2str(t_identcolor ident)
+static char	*idcol2str(t_identcolor ident)
 {
 	if (ident == ID_C)
 		return ("C");
@@ -23,7 +35,7 @@ static int	get_rgb_colornumber(t_cub3d *cub, t_parser *p, int i,
 	{
 		if ((nbr < 0) || (nbr > 255))
 			return (err_fail2("RGB color smaller than 0 or bigger than 255 in ",
-					identcolor2str(id)));
+					idcol2str(id)));
 		else if (i == 0)
 			cub->color[id].r = nbr;
 		else if (i == 1)
@@ -33,7 +45,7 @@ static int	get_rgb_colornumber(t_cub3d *cub, t_parser *p, int i,
 		return (EXIT_SUCCESS);
 	}
 	else
-		return (err_fail2("RGB color is not digit in ", identcolor2str(id)));
+		return (err_fail2("RGB color is not digit in ", idcol2str(id)));
 }
 
 static int	get_rgb(t_cub3d *cub, t_parser *p, t_identcolor id)
@@ -42,13 +54,13 @@ static int	get_rgb(t_cub3d *cub, t_parser *p, t_identcolor id)
 
 	if ((!p->line) || (ft_strlen(p->line) < 6) || (p->line[0] == '\n'))
 		return (err_fail2("Something missing in RGB colors in ",
-				identcolor2str(id)));
+				idcol2str(id)));
 	p->split = ft_split(p->line, ',');
 	i = 0;
 	while (i < 3)
 	{
 		if (!p->split[i])
-			return (err_fail2("Missing RGB color in the ", identcolor2str(id)));
+			return (err_fail2("Missing RGB color in the ", idcol2str(id)));
 		if (get_rgb_colornumber(cub, p, i, id))
 			return (EXIT_FAILURE);
 		i++;
@@ -58,7 +70,7 @@ static int	get_rgb(t_cub3d *cub, t_parser *p, t_identcolor id)
 	{
 		cub->color[id].rgb = rgb_to_color_hex(cub->color[id].r,
 				cub->color[id].g, cub->color[id].b);
-		printf("Color rgb: %d in the %s \n", cub->color[id].rgb, identcolor2str(id));
+		printf("Color rgb: %d in the %s \n", cub->color[id].rgb, idcol2str(id));
 		cub->color[id].used = COLOR_IN_USE;
 		return (EXIT_SUCCESS);
 	}

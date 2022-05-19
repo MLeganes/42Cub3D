@@ -18,10 +18,8 @@
 # define MAX			4
 # define MAX_COLOR		2
 
-// # define W_HEIGHT		500
-// # define W_WIDTH		1000
-# define W_HEIGHT		480 //changed to t_cub3d structure
-# define W_WIDTH		640 //changed to t_cub3d structure
+# define W_HEIGHT		1000
+# define W_WIDTH		1000
 
 # define COLOR_NO_USED	-1
 # define COLOR_IN_USE	0
@@ -66,7 +64,7 @@ typedef enum e_identifier_color
 typedef struct s_img
 {
 	char	*path_tex;
-	void	*ptr; //mlx pointer
+	void	*ptr;
 	int		*addr;
 	int		bits_p_pixel;
 	int		size_line;
@@ -94,8 +92,6 @@ typedef struct s_color
 
 typedef struct s_map
 {
-	int		height; // no used
-	int		width; // maybe no used
 	int		h;
 	int		w;
 	int		rows;
@@ -136,41 +132,28 @@ typedef struct	s_ray
 	int			found_ver_wall;
 	double		distance;
 	int			hit_vertical;
-//	t_text		text_wallhit;
-//	t_line		line;
 }				t_ray;
 
 
-typedef struct s_cub3d{
-	char	*img_no;//no used
-	char	*img_so;//no used
-	char	*img_we;//no used
-	char	*img_ea;//no used
-
-	//mlx
+typedef struct s_cub3d
+{
 	void	*mlx;
 	void	*win;
 	int		win_w;
 	int		win_h;
-
-	// texture, colors and mlx init parameter
 	t_img	*img[MAX];
-	t_color color[MAX_COLOR];	//Color for floor and celling.
+	t_color	color[MAX_COLOR];
 	int		color_floor;
 	int		color_celling;
 	t_img	*img3d;
-
-	// map
 	t_map	map;
-
-	// player
 	t_cor	pos;
 	int		rotation;
 
 }			t_cub3d;
 
 typedef struct s_draw{
-	t_cub3d *cub;
+	t_cub3d	*cub;
 	t_cor	*poscntct;
 }			t_draw;
 
