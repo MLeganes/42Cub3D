@@ -1,6 +1,6 @@
 NAME		=	cub3d
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror
 
 S			=	src/
 O			=	obj/
@@ -20,11 +20,6 @@ SRCS		=	$Scub3d.c \
 # To run in iMac wit libmlx.
 LIBRARIES	=	-Llibft -lft -Llibmlx -lmlx -framework OpenGL -framework AppKit
 INCLUDES	=	-I ./inc -Ilibft -Ilibmlx
-
-# To run in Linux without libmlx.
-#LIBRARIES	=	-Llibft -lft
-#INCLUDES	=	-I ./inc -Ilibft
-
 
 all:		$(NAME)
 

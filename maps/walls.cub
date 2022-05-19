@@ -1,6 +1,6 @@
 NO ./imgs/wall1.xpm
-SO ./imgs/wall1.xpm
-WE ./imgs/wall1.xpm
+SO ./imgs/wall2.xpm
+WE ./imgs/wall3.xpm
 EA ./imgs/wall4.xpm
 F 220,100,1
 C 225,30,0
