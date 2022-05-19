@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_ext.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 17:27:49 by amorcill          #+#    #+#             */
-/*   Updated: 2022/05/08 10:42:53 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/19 20:08:47 by mnies            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,41 +29,41 @@ static int	ft_sign(char c)
 
 /**
  * @brief	The ft_strtoi() function converts the string in str to a int value.
- * 			The string may begin with an arbitrary amount of white space (as 
- * 			determined by ft_isspace) followed by a single optional `+' or `-' 
+ * 			The string may begin with an arbitrary amount of white space (as
+ * 			determined by ft_isspace) followed by a single optional `+' or `-'
  * 			sign. Base is taken as 10 (decimal) by default.
- * 
+ *
  * @param str The sting with the number.
  * @param nbr Pointer to return the integer number.
  * @return int The ft_strtoi() function return the result of the conversion:
  * 	1 the conversion was successful.
  * 	0 is returned, if no conversion could be performed.
  */
-int	ft_atoi_ext(const char *str, int *nbr)
+int	ft_atoi_ext(const char *st, int *nbr)
 {
-	unsigned int	result;
-	int				sign;
+	unsigned int	r;
+	int				s;
 	int				i;
 
-	sign = 1;
-	result = 0;
+	s = 1;
+	r = 0;
 	i = 0;
-	while (ft_isspace(str[i]))
+	while (ft_isspace(st[i]))
 		i++;
-	if (str[i] == '+' || str[i] == '-')
+	if (st[i] == '+' || st[i] == '-')
 	{
-		sign = ft_sign(str[i]);
+		s = ft_sign(st[i]);
 		i++;
 	}
-	while ((str[i] != '\n') && str[i] != '\0' && result <= 2147483648)
+	while ((st[i] != '\n') && st[i] != '\0' && r <= 2147483648)
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(st[i]))
 			return (0);
-		result = (result * 10) + (str[i] - '0');
+		r = (r * 10) + (st[i] - '0');
 		i++;
 	}
-	if ((sign == -1 && result > 2147483648) || (sign == 1 && result > INT_MAX))
+	if ((s == -1 && r > 2147483648) || (s == 1 && r > INT_MAX) || st[0] == '\n')
 		return (0);
-	*nbr = (int)(sign * result);
+	*nbr = (int)(s * r);
 	return (1);
 }

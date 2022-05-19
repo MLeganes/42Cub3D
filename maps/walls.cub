@@ -1,8 +1,8 @@
 NO ./imgs/wall1.xpm
 SO ./imgs/wall1.xpm
 WE ./imgs/wall1.xpm
-EA ./imgs/pic1.xpm
-F 220,100,0
+EA ./imgs/wall4.xpm
+F 220,100,1
 C 225,30,0
 
         1111111111111111111111111

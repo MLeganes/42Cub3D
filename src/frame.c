@@ -6,7 +6,7 @@
 /*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:44:03 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 18:39:01 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/19 20:15:50 by mnies            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	frame_draw_pixel_wall(int column, int row, int height, t_draw *draw)
 	int	id;
 	int	pos;
 
+	id = ID_NO;
 	if (draw->poscntct->x - (int)draw->poscntct->x == 0
 		&& draw->poscntct->x > draw->cub->pos.x)
 		id = ID_EA;
@@ -25,8 +26,6 @@ void	frame_draw_pixel_wall(int column, int row, int height, t_draw *draw)
 		id = ID_WE;
 	else if (draw->poscntct->y > draw->cub->pos.y)
 		id = ID_SO;
-	else
-		id = ID_NO;
 	h = row - ((W_HEIGHT - height) / 2);
 	if (draw->poscntct->x - (int)draw->poscntct->x == 0)
 		pos = (draw->poscntct->y - (int)draw->poscntct->y)
@@ -35,7 +34,9 @@ void	frame_draw_pixel_wall(int column, int row, int height, t_draw *draw)
 		pos = (draw->poscntct->x - (int)draw->poscntct->x)
 			* (draw->cub->img[id]->width - 1);
 	pos = (int)((float)h / height * (draw->cub->img[id]->height - 1))
-		*draw->cub->img[id]->width + pos;
+		*(draw->cub->img[id]->width) + pos;
+	if (pos > draw->cub->img[id]->width * draw->cub->img[id]->height -1)
+		return ;
 	draw->cub->img3d->addr[(int)(row * (int)draw->cub->win_w + column)]
 		= draw->cub->img[id]->addr[pos];
 }
@@ -105,5 +106,6 @@ int	render_frame(void *cub_ptr)
 			&cub->img3d->endian);
 	frame_render_loop(&cam_vec, cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img3d->ptr, 0, 0);
+	mlx_destroy_image(cub->mlx, cub->img3d->ptr);
 	return (0);
 }
