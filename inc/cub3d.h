@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/19 16:09:24 by mnies             #+#    #+#             */
+/*   Updated: 2022/05/19 16:10:19 by mnies            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -27,7 +38,6 @@
 # define MAP_CHARS "01NSEW"
 # define MAP_INSIDE "0NSEW"
 # define MAP_PLAYER "NSEW"
-
 
 /*
  * KEY CODES
@@ -97,7 +107,7 @@ typedef struct s_map
 	int		rows;
 	int		cols;
 	int		tile_size;
-	int		nolines; // it should be same as rows
+	int		nolines;
 	char	**map;
 }			t_map;
 
@@ -106,8 +116,7 @@ typedef struct s_cor{
 	float	y;
 }			t_cor;
 
-
-typedef struct	s_ray
+typedef struct s_ray
 {
 	double		fov;
 	double		fovref_min;
@@ -133,7 +142,6 @@ typedef struct	s_ray
 	double		distance;
 	int			hit_vertical;
 }				t_ray;
-
 
 typedef struct s_cub3d
 {
@@ -169,7 +177,6 @@ typedef struct s_parser_helper
 	char			player;
 	t_cor			player_pos;
 }					t_parser;
-
 
 /* ************************************************************************** */
 /* FUNCTION PROTOTYPES														  */
@@ -210,7 +217,6 @@ int		is_player(t_parser *p);
 int		is_map_wall(char *line);
 int		is_map_chars(char *line);
 
-
 /*
  * FRAME
  */
@@ -235,7 +241,6 @@ int		game_key_hooks(t_cub3d *cub);
 int		map_count_lines(char **strs);
 int		map_max_strlen(char **strs);
 double	calculate_tilesize(t_cub3d *cub);
-
 
 /*
  * ERROR
