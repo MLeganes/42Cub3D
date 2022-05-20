@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:41:25 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 17:16:27 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/20 15:20:56 by mnies            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ int	copy_map_to_cub(t_cub3d *cub, t_parser *parse, char **map, int i)
 	cub->pos.x = parse->player_pos.x;
 	if (parse->player == 'N')
 		cub->rotation = 270;
-	else if (parse->player == 'W')
+	else if (parse->player == 'E')
 		cub->rotation = 0;
 	else if (parse->player == 'S')
 		cub->rotation = 90;
-	else if (parse->player == 'E')
+	else if (parse->player == 'W')
 		cub->rotation = 180;
 	return (1);
 }
