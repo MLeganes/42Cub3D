@@ -1,6 +1,6 @@
-NAME		=	cub3d
+NAME		=	cub3D
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror -g
 
 S			=	src/
 O			=	obj/
