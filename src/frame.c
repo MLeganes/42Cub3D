@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:44:03 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/19 20:54:41 by amorcill         ###   ########.fr       */
+/*   Updated: 2022/05/20 19:00:03 by mnies            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,19 @@ void	frame_draw_pixel_wall(int column, int row, int height, t_draw *draw)
 		= draw->cub->img[id]->addr[pos];
 }
 
-void	frame_draw_line(int column, t_cor *poscntct, t_cub3d *cub)
+void	frame_draw_line(int column, t_cor *poscntct, t_cub3d *cub, float angle)
 {
 	int		row;
 	int		wall_height;
 	t_draw	draw;
 	float	dist;
 
-	dist = hypot(poscntct->x - cub->pos.x, poscntct->y - cub->pos.y);
+	dist = cos(angle)
+		* hypot(poscntct->x - cub->pos.x, poscntct->y - cub->pos.y);
 	draw.cub = cub;
 	draw.poscntct = poscntct;
 	row = 0;
-	wall_height = (W_HEIGHT / 2) / dist;
+	wall_height = (W_HEIGHT / dist) * W_WIDTH / W_HEIGHT / 2;
 	while (row < W_HEIGHT)
 	{
 		if (row < (W_HEIGHT - wall_height) / 2)
@@ -73,6 +74,7 @@ void	frame_render_loop(t_cor *cam_vec, t_cub3d *cub)
 	float	multi;
 	t_cor	column_vector;
 	t_cor	pos_cntct;
+	float	angle;
 
 	column = 0;
 	while (column < W_WIDTH)
@@ -83,11 +85,14 @@ void	frame_render_loop(t_cor *cam_vec, t_cub3d *cub)
 			multi = -((float)(W_WIDTH - 2 * column) / W_WIDTH);
 		else
 			multi = (float)(2 * column - W_WIDTH) / W_WIDTH;
-		column_vector.x = cam_vec->x + multi * cam_vec->y;
-		column_vector.y = cam_vec->y + multi * -cam_vec->x;
+		column_vector.x = cam_vec->x + (multi * cam_vec->y);
+		column_vector.y = cam_vec->y + (multi * -cam_vec->x);
+		angle = atan(sqrt((multi * cam_vec->y) * (multi * cam_vec->y)
+					+ (multi * -cam_vec->x) * (multi * -cam_vec->x))
+				/ sqrt(cam_vec->x * cam_vec->x + cam_vec->y * cam_vec->y));
 		while (!contact_is_wall(cub, &pos_cntct, &column_vector))
 			contact_get_next(&pos_cntct, &column_vector);
-		frame_draw_line((W_WIDTH - (column + 1)), &pos_cntct, cub);
+		frame_draw_line((W_WIDTH - (column + 1)), &pos_cntct, cub, angle);
 		column++;
 	}
 }

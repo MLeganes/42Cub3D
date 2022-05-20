@@ -6,7 +6,7 @@
 /*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:09:24 by mnies             #+#    #+#             */
-/*   Updated: 2022/05/20 01:15:57 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/20 19:00:53 by mnies            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define MAX_COLOR		2
 
 # define W_HEIGHT		1000
-# define W_WIDTH		1000
+# define W_WIDTH		1500
 
 # define COLOR_NO_USED	-1
 # define COLOR_IN_USE	0
