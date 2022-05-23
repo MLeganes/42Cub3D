@@ -1,6 +1,6 @@
 NAME		=	cub3D
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror
 
 S			=	src/
 O			=	obj/
@@ -15,20 +15,13 @@ SRCS		=	$Scub3d.c \
 				$Sgame.c $Sgame_keys.c $Sgame_utils1.c \
 				$Serror.c \
 
-# CONFIGURATION FOR LIB AND INC
-
-# To run in iMac wit libmlx.
 LIBRARIES	=	-Llibft -lft -Llibmlx -lmlx -framework OpenGL -framework AppKit
 INCLUDES	=	-I ./inc -Ilibft -Ilibmlx
 
 all:		$(NAME)
 
 # Linking...
-# To run in iMac wit libmlx.
 $(NAME):	libft/libft.a libmlx/libmlx.a $(OBJS)
-
-# To run in Linux without libmlx.
-#$(NAME):	libft/libft.a $(OBJS)
 			@echo "\033[1;32m$(NAME)\033[1;0m\033[32m linking...\033[0m"
 			@$(CC) $(OBJS) $(LIBRARIES) -o $(NAME)
 			@echo "\033[1;32m$(NAME)\033[1;0m\033[32m created.\033[0m"
