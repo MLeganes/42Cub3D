@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnies <mnies@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amorcill <amorcill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:48:25 by amorcill          #+#    #+#             */
-/*   Updated: 2022/05/20 15:06:18 by mnies            ###   ########.fr       */
+/*   Updated: 2022/05/23 15:35:21 by amorcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	free_game_exit(t_cub3d *cub, int exit_status)
 {
 	free_cub3d_img(cub);
 	free_cub3d_map(cub);
-	system("leaks");
 	exit (exit_status);
 }
 
