@@ -1,8 +1,7 @@
-NO ./imgs/no.xpm
-SO ./imgs/so.xpm
-WE ./imgs/we.xpm
-EA ./imgs/ea.xpm
-
+NO ./imgs/wall1.xpm
+SO ./imgs/wall2.xpm
+WE ./imgs/wall3.xpm
+EA ./imgs/wall4.xpm
 
 F 220,100,0
 C 225,30,0
