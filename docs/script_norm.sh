@@ -1,0 +1,1 @@
+norminette inc && norminette src && norminette libft
